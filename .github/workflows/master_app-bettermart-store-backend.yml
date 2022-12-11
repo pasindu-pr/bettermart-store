@@ -5,6 +5,8 @@ name: Build and deploy ASP.Net Core app to Azure Web App - app-bettermart-store-
 
 on:
   push:
+    paths:
+      - 'backend-api/**'
     branches:
       - master
   workflow_dispatch:
