@@ -1,4 +1,12 @@
+using Bettermart.Domain.Entities;
+using Bettermart.Persistance.Repositories;
+using Bettermart_Application.Contracts;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.Configure<BettermartDatabase>(
+    builder.Configuration.GetSection("BettermartStoreDatabase"));
 
 // Add services to the container.
 
