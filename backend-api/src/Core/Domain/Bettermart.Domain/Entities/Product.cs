@@ -1,16 +1,14 @@
 ﻿
 
+using Bettermart_Application.Contracts;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Bettermart.Domain.Entities
 {
-   public class Product 
+   [BsonCollection("products")]
+   public class Product : Document
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
-
         [BsonElement("name")]
         public string Name { get; set; } = string.Empty;
 
@@ -30,7 +28,7 @@ namespace Bettermart.Domain.Entities
         public int StockCount { get; set; }
 
         [BsonElement("reviews")]
-        public string[] Reviews { get; set; }
-
+        public string[]? Reviews { get; set; }
+       
     }
 }

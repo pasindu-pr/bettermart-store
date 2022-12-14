@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Core\Application\Bettermart-Application\Bettermart-Application.csproj" />
     <ProjectReference Include="..\..\Core\Domain\Bettermart.Domain\Bettermart.Domain.csproj" />
     <ProjectReference Include="..\..\Insfrastructure\Persistance\Bettermart.Persistance\Bettermart.Persistance.csproj" />
