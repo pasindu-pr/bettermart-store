@@ -5,7 +5,7 @@ namespace Bettermart_Application.DTOs.Products
 {
     public class GetProductDto
     {
-        public string Id { get; set; } = string.Empty;
+        public string? Id { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty; 
         public string Brand { get; set; } = string.Empty;  
         public string Category { get; set; } = string.Empty;     
@@ -13,6 +13,6 @@ namespace Bettermart_Application.DTOs.Products
         public float Price { get; set; }
         public int StockCount { get; set; }
         public string[]? Reviews { get; set; }
-        public DateTime CreatedAt { get; }
+        public DateTime? CreatedAt { get; }
     }
 }

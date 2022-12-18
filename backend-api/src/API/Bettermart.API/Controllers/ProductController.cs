@@ -1,4 +1,5 @@
 ﻿using Bettermart_Application.DTOs.Products;
+using Bettermart_Application.Features.Products.Commands;
 using Bettermart_Application.Features.Products.Queries;
 using MediatR; 
 using Microsoft.AspNetCore.Mvc;
@@ -24,20 +25,11 @@ namespace Bettermart.API.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task AddPerson(string name, string brand, string category, string image, float price, int stockcount)
-        //{
-        //    var person = new Product()
-        //    {
-        //       Name = name,
-        //       Brand = brand,
-        //       Category = category,
-        //       Image = image,
-        //       Price = price,
-        //       StockCount = stockcount
-        //    };
-
-        //    await _productsRepository.InsertOneAsync(person);
-        //}
+        [HttpPost]
+        public async Task<List<GetProductDto>> CreateProduct(CreateProductDto product)
+        {
+            var products = await _mediator.Send(new CreateProductCommand { Product = product});
+            return products;
+        }
     }
 }

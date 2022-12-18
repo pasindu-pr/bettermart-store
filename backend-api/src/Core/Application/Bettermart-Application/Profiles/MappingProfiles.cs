@@ -9,6 +9,7 @@ namespace Bettermart_Application.Profiles
         public MappingProfiles()
         {
             CreateMap<Product, GetProductDto>().ReverseMap();
+            CreateMap<CreateProductDto, Product>().ReverseMap();
         }
     }
 }
