@@ -38,5 +38,12 @@ namespace Bettermart.API.Controllers
             var products = await _mediator.Send(new CreateProductCommand { Product = product});
             return products;
         }
+
+        [HttpPut("{productId}")]
+        public async Task<ActionResult<BaseResponse<GetProductDto>>> UpdateProduct([FromBody] UpdateProductDto product)
+        {
+            var updatedProduct = await _mediator.Send(new UpdateProductCommand { Product = product });
+            return updatedProduct;
+        }
     }
 }
