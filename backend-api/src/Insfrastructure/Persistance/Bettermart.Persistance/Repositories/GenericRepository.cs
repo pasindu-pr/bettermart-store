@@ -75,9 +75,9 @@ namespace Bettermart.Persistance.Repositories
             _collection.InsertOne(document);
         }
 
-        public virtual Task InsertOneAsync(TDocument document)
+        public virtual async Task InsertOneAsync(TDocument document)
         {
-            return Task.Run(() => _collection.InsertOneAsync(document));
+            await _collection.InsertOneAsync(document);
         }
 
         public void InsertMany(ICollection<TDocument> documents)
