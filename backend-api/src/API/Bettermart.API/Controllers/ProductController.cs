@@ -1,6 +1,6 @@
-﻿using Bettermart.Domain.Entities;
-using Bettermart_Application.Contracts;
-using Microsoft.AspNetCore.Http;
+﻿using Bettermart_Application.DTOs.Products;
+using Bettermart_Application.Features.Products.Queries;
+using MediatR; 
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bettermart.API.Controllers
@@ -9,28 +9,35 @@ namespace Bettermart.API.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IGenericRepository<Product> _productsRepository;
+        private readonly IMediator _mediator;
 
-        public ProductController(IGenericRepository<Product> productsRepository)
+        public ProductController(IMediator mediator)
         {
-            _productsRepository = productsRepository;
+            _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<List<GetProductDto>> GetProducts()
+        {
+            var products = await _mediator.Send(new GetProductListQuery());
+            return products;
         }
 
 
-        [HttpPost("createProduct")]
-        public async Task AddPerson(string name, string brand, string category, string image, float price, int stockcount)
-        {
-            var person = new Product()
-            {
-               Name = name,
-               Brand = brand,
-               Category = category,
-               Image = image,
-               Price = price,
-               StockCount = stockcount
-            };
+        //[HttpPost]
+        //public async Task AddPerson(string name, string brand, string category, string image, float price, int stockcount)
+        //{
+        //    var person = new Product()
+        //    {
+        //       Name = name,
+        //       Brand = brand,
+        //       Category = category,
+        //       Image = image,
+        //       Price = price,
+        //       StockCount = stockcount
+        //    };
 
-            await _productsRepository.InsertOneAsync(person);
-        }
+        //    await _productsRepository.InsertOneAsync(person);
+        //}
     }
 }

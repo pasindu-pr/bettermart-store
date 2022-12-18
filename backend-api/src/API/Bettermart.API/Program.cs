@@ -2,6 +2,8 @@ using Bettermart.Domain;
 using Bettermart.Domain.Entities;
 using Bettermart.Persistance;
 using Bettermart.Persistance.Repositories;
+using Bettermart.Persistance.Settings;
+using Bettermart_Application;
 using Bettermart_Application.Contracts;
 using Microsoft.Extensions.Options;
 
@@ -13,8 +15,8 @@ var connectionString = builder.Configuration.GetSection("DatabaseSettings");
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddSingleton<IDatabaseSettings>(serviceProvider =>
     serviceProvider.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-
 builder.Services.ConfigurePersistanceServices();
+builder.Services.ConfigureApplicationServices();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

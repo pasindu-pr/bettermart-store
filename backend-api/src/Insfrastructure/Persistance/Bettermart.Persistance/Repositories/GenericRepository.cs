@@ -1,5 +1,6 @@
-﻿using Bettermart.Domain.Entities;
-using Bettermart_Application.Contracts; 
+﻿using Bettermart.Domain.Contracts;
+using Bettermart.Domain.Entities;
+using Bettermart_Application.Contracts;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Linq.Expressions;
@@ -30,10 +31,10 @@ namespace Bettermart.Persistance.Repositories
             return _collection.AsQueryable();
         }
 
-        public virtual IEnumerable<TDocument> FilterBy(
+        public virtual async Task<List<TDocument>> FilterBy(
             Expression<Func<TDocument, bool>> filterExpression)
         {
-            return _collection.Find(filterExpression).ToEnumerable();
+            return await _collection.Find(filterExpression).ToListAsync();
         }
 
         public virtual IEnumerable<TProjected> FilterBy<TProjected>(
@@ -55,17 +56,15 @@ namespace Bettermart.Persistance.Repositories
 
         public virtual TDocument FindById(string id)
         {
-            var objectId = new ObjectId(id);
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
             return _collection.Find(filter).SingleOrDefault();
         }
 
         public virtual Task<TDocument> FindByIdAsync(string id)
         {
             return Task.Run(() =>
-            {
-                var objectId = new ObjectId(id);
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+            { 
+                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
                 return _collection.Find(filter).SingleOrDefaultAsync();
             });
         }
@@ -115,18 +114,16 @@ namespace Bettermart.Persistance.Repositories
         }
 
         public void DeleteById(string id)
-        {
-            var objectId = new ObjectId(id);
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+        { 
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
             _collection.FindOneAndDelete(filter);
         }
 
         public Task DeleteByIdAsync(string id)
         {
             return Task.Run(() =>
-            {
-                var objectId = new ObjectId(id);
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+            { 
+                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
                 _collection.FindOneAndDeleteAsync(filter);
             });
         }
