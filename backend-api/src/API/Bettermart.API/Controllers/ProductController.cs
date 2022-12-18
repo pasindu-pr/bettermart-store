@@ -40,10 +40,17 @@ namespace Bettermart.API.Controllers
         }
 
         [HttpPut("{productId}")]
-        public async Task<ActionResult<BaseResponse<GetProductDto>>> UpdateProduct([FromBody] UpdateProductDto product)
+        public async Task<ActionResult<BaseResponse<GetProductDto>>> UpdateProduct(UpdateProductDto product)
         {
-            var updatedProduct = await _mediator.Send(new UpdateProductCommand { Product = product });
-            return updatedProduct;
+            var updatedProductResponse = await _mediator.Send(new UpdateProductCommand { Product = product });
+            return updatedProductResponse;
+        }
+
+        [HttpDelete("{productId}")]
+        public async Task<ActionResult<BaseResponse<GetProductDto>>> DeleteProduct(string productId)
+        {
+            var deletedProductResponse = await _mediator.Send(new DeleteProductCommand { ProductId = productId });
+            return deletedProductResponse;
         }
     }
 }

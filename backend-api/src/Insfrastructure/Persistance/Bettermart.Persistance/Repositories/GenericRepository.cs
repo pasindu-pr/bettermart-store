@@ -116,13 +116,10 @@ namespace Bettermart.Persistance.Repositories
             _collection.FindOneAndDelete(filter);
         }
 
-        public Task DeleteByIdAsync(string id)
+        public async Task DeleteByIdAsync(string id)
         {
-            return Task.Run(() =>
-            { 
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
-                _collection.FindOneAndDeleteAsync(filter);
-            });
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
+            await _collection.FindOneAndDeleteAsync(filter);
         }
 
         public void DeleteMany(Expression<Func<TDocument, bool>> filterExpression)
