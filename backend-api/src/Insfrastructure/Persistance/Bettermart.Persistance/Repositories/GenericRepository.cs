@@ -60,13 +60,10 @@ namespace Bettermart.Persistance.Repositories
             return _collection.Find(filter).SingleOrDefault();
         }
 
-        public virtual Task<TDocument> FindByIdAsync(string id)
+        public virtual async Task<TDocument> FindByIdAsync(string id)
         {
-            return Task.Run(() =>
-            { 
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
-                return _collection.Find(filter).SingleOrDefaultAsync();
-            });
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
+            return await _collection.Find(filter).SingleOrDefaultAsync();
         }
 
 
@@ -119,13 +116,10 @@ namespace Bettermart.Persistance.Repositories
             _collection.FindOneAndDelete(filter);
         }
 
-        public Task DeleteByIdAsync(string id)
+        public async Task DeleteByIdAsync(string id)
         {
-            return Task.Run(() =>
-            { 
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
-                _collection.FindOneAndDeleteAsync(filter);
-            });
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
+            await _collection.FindOneAndDeleteAsync(filter);
         }
 
         public void DeleteMany(Expression<Func<TDocument, bool>> filterExpression)

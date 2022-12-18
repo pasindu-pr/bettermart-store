@@ -4,7 +4,8 @@ using MediatR;
 
 namespace Bettermart_Application.Features.Products.Queries
 {
-    public class GetProductListQuery: IRequest<BaseResponse<List<GetProductDto>>>
+    public class GetProductQuery: IRequest<BaseResponse<GetProductDto>>
     {
+        public string ProductId { get; set; } = string.Empty; 
     }
 }

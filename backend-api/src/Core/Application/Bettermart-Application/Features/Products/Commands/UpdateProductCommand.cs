@@ -4,8 +4,8 @@ using MediatR;
 
 namespace Bettermart_Application.Features.Products.Commands
 {
-    public class CreateProductCommand: IRequest<BaseResponse<List<GetProductDto>>>
+    public class UpdateProductCommand: IRequest<BaseResponse<GetProductDto>>
     {
-        public CreateProductDto Product { get; set; }
+        public UpdateProductDto Product;
     }
 }
