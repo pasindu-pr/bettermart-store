@@ -1,6 +1,6 @@
 ﻿using Bettermart_Application.Contracts;
 
-namespace Bettermart.Domain.Entities
+namespace Bettermart.Persistance.Settings
 {
     public class DatabaseSettings: IDatabaseSettings
     {

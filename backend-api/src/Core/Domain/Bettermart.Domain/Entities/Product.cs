@@ -1,6 +1,4 @@
-﻿
-
-using Bettermart_Application.Contracts;
+﻿using Bettermart.Domain.Contracts;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 

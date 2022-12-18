@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Bettermart.Domain.Contracts;
+using System.Linq.Expressions;
 
 namespace Bettermart_Application.Contracts
 {
@@ -6,7 +7,7 @@ namespace Bettermart_Application.Contracts
     {
         IQueryable<TDocument> AsQueryable();
 
-        IEnumerable<TDocument> FilterBy(
+        Task<List<TDocument>> FilterBy(
             Expression<Func<TDocument, bool>> filterExpression);
 
         IEnumerable<TProjected> FilterBy<TProjected>(
