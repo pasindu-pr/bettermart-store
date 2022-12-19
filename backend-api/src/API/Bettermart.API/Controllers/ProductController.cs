@@ -2,7 +2,8 @@
 using Bettermart_Application.Features.Products.Commands;
 using Bettermart_Application.Features.Products.Queries;
 using Bettermart_Application.Responses;
-using MediatR; 
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bettermart.API.Controllers
@@ -18,6 +19,7 @@ namespace Bettermart.API.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<BaseResponse<List<GetProductDto>>> GetProducts()
         {
