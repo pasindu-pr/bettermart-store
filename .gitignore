@@ -444,3 +444,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+appsettings.Development.json
+backend-api/src/API/Bettermart.API/appsettings.Development.json
