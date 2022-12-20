@@ -1,86 +1,165 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { PageLayout } from "../layouts";
+
+const products = [
+  {
+    id: 1,
+    name: "Focus Paper Refill",
+    href: "#",
+    price: "$13",
+    description: "3 sizes available",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-01.jpg",
+    imageAlt:
+      "Person using a pen to cross a task off a productivity paper card.",
+  },
+  {
+    id: 2,
+    name: "Focus Card Holder",
+    href: "#",
+    price: "$64",
+    description: "Walnut",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-02.jpg",
+    imageAlt: "Paper card sitting upright in walnut card holder on desk.",
+  },
+  {
+    id: 3,
+    name: "Focus Carry Case",
+    href: "#",
+    price: "$32",
+    description: "Heather Gray",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-03.jpg",
+    imageAlt:
+      "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
+  },
+  // More products...
+];
+
+const products_trending = [
+  {
+    id: 1,
+    name: "Leather Long Wallet",
+    color: "Natural",
+    price: "$75",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg",
+    imageAlt: "Hand stitched, orange leather long wallet.",
+  },
+  // More products...
+];
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <PageLayout>
+      <div className="bg-white">
+        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h2 id="products-heading" className="sr-only">
+            Products
+          </h2>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8">
+            {products.map((product) => (
+              <a key={product.id} href={product.href} className="group">
+                <div className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
+                  <img
+                    src={product.imageSrc}
+                    alt={product.imageAlt}
+                    className="w-full h-full object-center object-cover group-hover:opacity-75"
+                  />
+                </div>
+                <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
+                  <h3>{product.name}</h3>
+                  <p>{product.price}</p>
+                </div>
+                <p className="mt-1 text-sm italic text-gray-500">
+                  {product.description}
+                </p>
+              </a>
+            ))}
+          </div>
         </div>
-      </main>
+      </div>
+      {/* Treding Products */}
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
-  )
-}
+      <div className="bg-white">
+        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <div className="md:flex md:items-center md:justify-between">
+            <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
+              Trending products
+            </h2>
+            <a
+              href="#"
+              className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block"
+            >
+              Shop the collection<span aria-hidden="true"> &rarr;</span>
+            </a>
+          </div>
 
-export default Home
+          <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
+            {products.map((product) => (
+              <div key={product.id} className="group relative">
+                <div className="w-full h-56 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 lg:h-72 xl:h-80">
+                  <img
+                    src={product.imageSrc}
+                    alt={product.imageAlt}
+                    className="w-full h-full object-center object-cover"
+                  />
+                </div>
+                <h3 className="mt-4 text-sm text-gray-700">
+                  <a href={product.href}>
+                    <span className="absolute inset-0" />
+                    {product.name}
+                  </a>
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">product.color</p>
+                <p className="mt-1 text-sm font-medium text-gray-900">
+                  {product.price}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-sm md:hidden">
+            <a
+              href="#"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Shop the collection<span aria-hidden="true"> &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white">
+        <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h2 className="sr-only">Products</h2>
+
+          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            {products.map((product) => (
+              <a key={product.id} href={product.href} className="group">
+                <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+                  <img
+                    src={product.imageSrc}
+                    alt={product.imageAlt}
+                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  {product.price}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </PageLayout>
+  );
+};
+
+export default Home;
