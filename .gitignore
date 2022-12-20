@@ -10,7 +10,7 @@
 /coverage
 
 # next.js
-/.next/
+/frontend/.next/
 /out/
 
 # production
@@ -333,7 +333,7 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
-
+frontend/.next
 # Visual Studio 6 build log
 *.plg
 
