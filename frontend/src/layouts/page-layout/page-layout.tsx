@@ -7,7 +7,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Bettermart</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {children}
