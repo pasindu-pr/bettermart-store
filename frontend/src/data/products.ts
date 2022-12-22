@@ -18,7 +18,7 @@ export const products = [
     description: "Walnut",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-02.jpg",
-    imageAlt: "Paper card sitting upright in walnut card holder on desk",
+    imageAlt: "Paper card sitting upright in walnut card holder on desk.",
   },
   {
     id: 3,
