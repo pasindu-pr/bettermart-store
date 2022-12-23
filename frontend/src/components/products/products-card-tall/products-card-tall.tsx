@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductCardTallProps } from "../../../types";
+import { ProductCardProps } from "../../../types";
 
 const ProductsCardTall = ({
   id,
@@ -8,7 +8,7 @@ const ProductsCardTall = ({
   smallDescription,
   imageSrc,
   imageAlt,
-}: ProductCardTallProps) => {
+}: ProductCardProps) => {
   return (
     <div className="group">
       <div className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
