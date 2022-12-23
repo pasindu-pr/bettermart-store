@@ -1,4 +1,6 @@
 import React from "react";
+
+import { uuid } from "../../../libs";
 import { Product } from "../../../types";
 import ShoppingCartItem from "../shopping-cart-item/shopping-cart-item";
 
@@ -15,6 +17,7 @@ const ShoppingCartProductList = ({ products }: { products: Product[] }) => {
       >
         {products.map((product, productIdx) => (
           <ShoppingCartItem
+            key={uuid()}
             id="sdsd"
             name={product.name}
             price={product.price}

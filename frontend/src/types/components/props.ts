@@ -6,7 +6,7 @@ export type ProductCardProps = {
   id: string;
   name: string;
   price: string;
-  smallDescription: string;
+  smallDescription?: string;
   imageSrc: string;
   imageAlt: string;
   shippingTime?: string;

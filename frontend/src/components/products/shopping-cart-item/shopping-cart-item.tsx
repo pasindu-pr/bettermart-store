@@ -7,7 +7,6 @@ const ShoppingCartItem = ({
   id,
   name,
   price,
-  smallDescription,
   imageSrc,
   imageAlt,
   shippingTime,
