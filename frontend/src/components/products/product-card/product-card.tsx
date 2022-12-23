@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductCardTallProps } from "../../../types";
+import { ProductCardProps } from "../../../types";
 
 const ProductCard = ({
   id,
@@ -8,7 +8,7 @@ const ProductCard = ({
   smallDescription,
   imageSrc,
   imageAlt,
-}: ProductCardTallProps) => {
+}: ProductCardProps) => {
   return (
     <div key={id} className="group relative">
       <div className="w-full h-56 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 lg:h-72 xl:h-80">
