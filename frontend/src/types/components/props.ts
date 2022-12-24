@@ -17,6 +17,7 @@ export type OrderSummaryItemProps = {
   isQuestionMarkDisplayed: boolean;
   amount: number;
   srText?: string;
+  type?: "checkout-item";
 };
 
 export type ShoppingCartSummaryProps = {
@@ -39,4 +40,11 @@ export type ShoppingCartSummaryProps = {
     title: string;
     amount: number;
   };
+};
+
+export type CheckoutItemProps = {
+  name: string;
+  imageSrc: string;
+  imageAlt: string;
+  price: string;
 };
