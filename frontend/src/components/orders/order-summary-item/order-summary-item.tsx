@@ -7,9 +7,14 @@ const OrderSummaryItem = ({
   isQuestionMarkDisplayed,
   amount,
   srText,
+  type,
 }: OrderSummaryItemProps) => {
   return (
-    <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
+    <div
+      className={`${
+        type !== "checkout-item" && "border-t"
+      } border-gray-200 pt-4 flex items-center justify-between`}
+    >
       <dt className="flex text-sm text-gray-600">
         <span>{title}</span>
 
