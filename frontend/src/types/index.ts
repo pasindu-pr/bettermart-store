@@ -7,6 +7,7 @@ import { DeliveryMethod } from "./orders/deliveryMethod";
 import { SelectOption } from "./components/selectoptions";
 import { SelectProps } from "./components/props";
 import { ButtonProps } from "./components/props";
+import { InputComponentProps } from "./components/props";
 
 export type {
   CheckoutItemProps,
@@ -18,4 +19,5 @@ export type {
   SelectOption,
   SelectProps,
   ButtonProps,
+  InputComponentProps,
 };

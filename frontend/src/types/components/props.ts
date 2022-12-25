@@ -64,3 +64,15 @@ export type ButtonProps = {
   onClick?: (e: React.FormEvent) => void;
   type?: "button" | "submit";
 };
+
+export type InputComponentProps = {
+  autoComplete?: string;
+  id?: string;
+  label: string;
+  name: string;
+  value?: string | undefined;
+  error?: string | undefined;
+  type: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+};
