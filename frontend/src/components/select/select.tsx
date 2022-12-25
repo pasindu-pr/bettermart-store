@@ -1,14 +1,8 @@
 import React from "react";
 import { uuid } from "../../libs";
-import { SelectOption } from "../../types";
+import { SelectProps } from "../../types";
 
-export type SelectProps = {
-  label: string;
-  options: SelectOption[];
-  value: string;
-};
-
-const Select = ({ label, options, value }: SelectProps) => {
+const Select = ({ label, options, value, handleChange }: SelectProps) => {
   return (
     <div>
       <label
@@ -20,6 +14,7 @@ const Select = ({ label, options, value }: SelectProps) => {
       <div className="mt-1">
         <select
           value={value}
+          onChange={handleChange}
           id="country"
           name="country"
           autoComplete="country-name"

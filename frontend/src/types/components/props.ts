@@ -1,3 +1,6 @@
+import { ChangeEvent } from "react";
+import { SelectOption } from "./selectoptions";
+
 export type PageLayoutProps = {
   children: React.ReactNode;
 };
@@ -47,4 +50,11 @@ export type CheckoutItemProps = {
   imageSrc: string;
   imageAlt: string;
   price: string;
+};
+
+export type SelectProps = {
+  label: string;
+  options: SelectOption[];
+  value: string | undefined;
+  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
