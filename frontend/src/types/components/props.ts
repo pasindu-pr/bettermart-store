@@ -58,3 +58,9 @@ export type SelectProps = {
   value: string | undefined;
   handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
+
+export type ButtonProps = {
+  title: string;
+  onClick?: (e: React.FormEvent) => void;
+  type?: "button" | "submit";
+};
