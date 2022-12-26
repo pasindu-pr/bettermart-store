@@ -1,8 +1,14 @@
 import { useState } from "react";
 
-import { CheckoutItem, DeliveryMethod, Input } from "../../components";
+import {
+  Button,
+  CheckoutItem,
+  DeliveryMethod,
+  Input,
+  Select,
+} from "../../components";
 import CheckoutSummary from "../../components/orders/checkout-summary/checkout-summary";
-import { products } from "../../data";
+import { countries, products } from "../../data";
 import { deliveryMethods } from "../../data/orders";
 import { uuid } from "../../libs";
 import { DeliveryMethod as DeliveryMethodType } from "../../types";
@@ -11,8 +17,16 @@ export default function CheckoutPage() {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] =
     useState<DeliveryMethodType>(deliveryMethods[0]);
 
+  const [selectedCountry, setSelectedCountry] = useState<string | undefined>(
+    undefined
+  );
+
   const setDeliveryMethod = (deliveryMethod: DeliveryMethodType) => {
     setSelectedDeliveryMethod(deliveryMethod);
+  };
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCountry(e.target.value);
   };
 
   return (
@@ -120,24 +134,12 @@ export default function CheckoutPage() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="country"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Country
-                  </label>
-                  <div className="mt-1">
-                    <select
-                      id="country"
-                      name="country"
-                      autoComplete="country-name"
-                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    >
-                      <option>United States</option>
-                      <option>Canada</option>
-                      <option>Mexico</option>
-                    </select>
-                  </div>
+                  <Select
+                    options={countries}
+                    label="Country"
+                    value={selectedCountry}
+                    handleChange={handleCountryChange}
+                  />
                 </div>
 
                 <div>
@@ -217,12 +219,13 @@ export default function CheckoutPage() {
               />
 
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                <button
+                <Button
                   type="submit"
-                  className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                >
-                  Confirm order
-                </button>
+                  onClick={() => {
+                    console.log("");
+                  }}
+                  title="Pay"
+                />
               </div>
             </div>
           </div>

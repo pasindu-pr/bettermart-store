@@ -4,6 +4,10 @@ import { OrderSummaryItemProps } from "./components/props";
 import { Product } from "./products/product";
 import { CheckoutItemProps } from "./components/props";
 import { DeliveryMethod } from "./orders/deliveryMethod";
+import { SelectOption } from "./components/selectoptions";
+import { SelectProps } from "./components/props";
+import { ButtonProps } from "./components/props";
+import { InputComponentProps } from "./components/props";
 
 export type {
   CheckoutItemProps,
@@ -12,4 +16,8 @@ export type {
   OrderSummaryItemProps,
   Product,
   DeliveryMethod,
+  SelectOption,
+  SelectProps,
+  ButtonProps,
+  InputComponentProps,
 };

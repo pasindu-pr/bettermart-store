@@ -1,3 +1,4 @@
 import { products } from "./products";
+import { countries } from "./countries";
 
-export { products };
+export { products, countries };

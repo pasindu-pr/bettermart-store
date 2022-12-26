@@ -1,3 +1,6 @@
+import { ChangeEvent } from "react";
+import { SelectOption } from "./selectoptions";
+
 export type PageLayoutProps = {
   children: React.ReactNode;
 };
@@ -47,4 +50,29 @@ export type CheckoutItemProps = {
   imageSrc: string;
   imageAlt: string;
   price: string;
+};
+
+export type SelectProps = {
+  label: string;
+  options: SelectOption[];
+  value: string | undefined;
+  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export type ButtonProps = {
+  title: string;
+  onClick?: (e: React.FormEvent) => void;
+  type?: "button" | "submit";
+};
+
+export type InputComponentProps = {
+  autoComplete?: string;
+  id?: string;
+  label: string;
+  name: string;
+  value?: string | undefined;
+  error?: string | undefined;
+  type: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 };
