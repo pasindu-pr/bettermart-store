@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { MenuAlt1Icon } from "@heroicons/react/outline";
 import {
-  AccountSummary,
   ProfileDropdown,
   ProfileSection,
   SearchBar,
@@ -11,6 +10,8 @@ import SidebarMobile from "../../components/admin/sidebar-mobile/sidebar-mobile"
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  console.log(sidebarOpen);
 
   return (
     <div className="min-h-full">

@@ -3,9 +3,7 @@ import {
   ClockIcon,
   CreditCardIcon,
   HomeIcon,
-  MenuAlt1Icon,
   ScaleIcon,
-  XIcon,
 } from "@heroicons/react/outline";
 
 const navigation = [

@@ -1,10 +1,9 @@
 import React, { useState, Fragment } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   ClockIcon,
   CreditCardIcon,
   HomeIcon,
-  MenuAlt1Icon,
   ScaleIcon,
   XIcon,
 } from "@heroicons/react/outline";

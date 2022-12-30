@@ -1,10 +1,6 @@
 import React, { Fragment } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import {
-  CashIcon,
-  CheckCircleIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/solid";
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
