@@ -9,6 +9,11 @@ import ShoppingCartProductList from "./products/shopping-cart-prouducts-list/sho
 import Input from "./input/input";
 import DeliveryMethod from "./orders/delivery-method/delivery-method";
 import CheckoutItem from "./orders/checkout-item/checkout-item";
+import AccountSummary from "./admin/account-summary/account-summary";
+import SideBar from "./admin/sidebar/sidebar";
+import ProfileDropdown from "./admin/profile-dropdown/profile-dropdown";
+import SearchBar from "./admin/search-bar/search-bar";
+import ProfileSection from "./admin/profile-section/profile-section";
 
 export {
   DeliveryMethod,
@@ -22,4 +27,9 @@ export {
   ShoppingCartProductList,
   CheckoutItem,
   Button,
+  AccountSummary,
+  SideBar,
+  ProfileDropdown,
+  SearchBar,
+  ProfileSection,
 };
