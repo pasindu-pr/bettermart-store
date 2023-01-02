@@ -1,7 +1,7 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
-import { Button, H2, Input, Image } from "../../components";
+import React from "react";
+import { Button, H2, Image, Input } from "../../components";
 
-export default function Login() {
+const Register = () => {
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -29,6 +29,16 @@ export default function Login() {
                 type="email"
                 placeholder="Email"
                 additionalStyles="rounded-t"
+              />
+
+              <Input
+                name="email"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                }}
+                type="email"
+                placeholder="Name"
+                additionalStyles="rounded-0"
               />
 
               <Input
@@ -65,4 +75,6 @@ export default function Login() {
       </div>
     </>
   );
-}
+};
+
+export default Register;
