@@ -83,5 +83,5 @@ export type InputComponentProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   placeholder?: string;
-  additionalStyles: string;
+  additionalStyles?: string;
 };

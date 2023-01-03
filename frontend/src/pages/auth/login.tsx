@@ -1,7 +1,14 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { Button, H2, Input, Image } from "../../components";
+import { AuthService } from "../../services";
 
 export default function Login() {
+  const handleGoogleLogin = () => {
+    AuthService.loginWithGoogle().then((result) => {
+      console.log(result);
+    });
+  };
+
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -48,6 +55,13 @@ export default function Login() {
                 console.log(e);
               }}
               size="small"
+            />
+
+            <Button
+              title="Login with Google"
+              onClick={handleGoogleLogin}
+              size="small"
+              type="button"
             />
 
             <div className="flex items-center justify-between">
