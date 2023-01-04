@@ -101,7 +101,7 @@ export default function NavBar() {
               <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                 <p
                   className="cursor-pointer text-sm font-medium text-white hover:text-gray-100"
-                  onClick={() => router.push("/auth/login")}
+                  onClick={() => router.push("/auth/register")}
                 >
                   Create an account
                 </p>

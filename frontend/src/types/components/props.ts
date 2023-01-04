@@ -5,6 +5,10 @@ export type PageLayoutProps = {
   children: React.ReactNode;
 };
 
+export type H2Props = {
+  text: string;
+};
+
 export type ProductCardProps = {
   id: string;
   name: string;
@@ -63,16 +67,21 @@ export type ButtonProps = {
   title: string;
   onClick?: (e: React.FormEvent) => void;
   type?: "button" | "submit";
+  size?: "small" | "medium";
 };
+
+export type ImageProps = { src: string; alt: string };
 
 export type InputComponentProps = {
   autoComplete?: string;
   id?: string;
-  label: string;
+  label?: string;
   name: string;
   value?: string | undefined;
   error?: string | undefined;
   type: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  placeholder?: string;
+  additionalStyles?: string;
 };

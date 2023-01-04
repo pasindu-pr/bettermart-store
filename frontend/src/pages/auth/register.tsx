@@ -1,14 +1,9 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
-import { Button, H2, Input, Image } from "../../components";
-import { AuthService } from "../../services";
+import React from "react";
+import Link from "next/link";
 
-export default function Login() {
-  const handleGoogleLogin = () => {
-    AuthService.loginWithGoogle().then((result) => {
-      console.log(result);
-    });
-  };
+import { Button, H2, Image, Input } from "../../components";
 
+const Register = () => {
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -39,6 +34,16 @@ export default function Login() {
               />
 
               <Input
+                name="email"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                }}
+                type="email"
+                placeholder="Name"
+                additionalStyles="rounded-0"
+              />
+
+              <Input
                 name="password"
                 onChange={(e) => {
                   console.log(e.target.value);
@@ -57,21 +62,14 @@ export default function Login() {
               size="small"
             />
 
-            <Button
-              title="Login with Google"
-              onClick={handleGoogleLogin}
-              size="small"
-              type="button"
-            />
-
             <div className="flex items-center justify-between">
               <div className="text-sm">
-                <a
-                  href="#"
+                <Link
+                  href="/auth/login"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Forgot your password?
-                </a>
+                  Already have an account? Login from here
+                </Link>
               </div>
             </div>
           </form>
@@ -79,4 +77,6 @@ export default function Login() {
       </div>
     </>
   );
-}
+};
+
+export default Register;

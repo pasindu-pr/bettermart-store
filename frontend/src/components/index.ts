@@ -14,6 +14,8 @@ import SideBar from "./admin/sidebar/sidebar";
 import ProfileDropdown from "./admin/profile-dropdown/profile-dropdown";
 import SearchBar from "./admin/search-bar/search-bar";
 import ProfileSection from "./admin/profile-section/profile-section";
+import H2 from "./h2/h2";
+import Image from "./image/image";
 
 export {
   DeliveryMethod,
@@ -32,4 +34,6 @@ export {
   ProfileDropdown,
   SearchBar,
   ProfileSection,
+  H2,
+  Image,
 };
