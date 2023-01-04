@@ -1,12 +1,25 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+
 import { Button, H2, Input, Image } from "../../components";
 import { AuthService } from "../../services";
 
 export default function Login() {
+  const router = useRouter();
+
   const handleGoogleLogin = () => {
-    AuthService.loginWithGoogle().then((result) => {
-      console.log(result);
-    });
+    AuthService.loginWithGoogle()
+      .then(() => {
+        toast.success("You are logged in");
+        redirectToHome();
+      })
+      .catch(() => {
+        toast.error("There was an error while login");
+      });
+  };
+
+  const redirectToHome = () => {
+    router.push("/");
   };
 
   return (
@@ -57,13 +70,14 @@ export default function Login() {
               size="small"
             />
 
-            <Button
-              title="Login with Google"
-              onClick={handleGoogleLogin}
-              size="small"
-              type="button"
-            />
-
+            <div className="flex w-full justify-center gap-4">
+              <div
+                onClick={handleGoogleLogin}
+                className="flex items-center shadow-md px-2 cursor-pointer border-2 border-indigo-50 gap-3 rounded-3xl py-2"
+              >
+                <img src="/images/social/google.svg" className="w-6" />
+              </div>
+            </div>
             <div className="flex items-center justify-between">
               <div className="text-sm">
                 <a
