@@ -26,4 +26,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run build --if-present
+        env:
+          NEXT_PUBLIC_FB_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FB_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FB_API_KEY: ${{ secrets.NEXT_PUBLIC_FB_API_KEY }}
+          NEXT_PUBLIC_FB_PID: ${{ secrets.NEXT_PUBLIC_FB_PID }}
+          NEXT_PUBLIC_FB_STORAGE: ${{ secrets.NEXT_PUBLIC_FB_STORAGE }}
+          NEXT_PUBLIC_FB_MESSAGING: ${{ secrets.NEXT_PUBLIC_FB_MESSAGING }}
+          NEXT_PUBLIC_FB_APPID: ${{ secrets.NEXT_PUBLIC_FB_APPID }}
+          NEXT_PUBLIC_FB_MEASUREID: ${{ secrets.NEXT_PUBLIC_FB_MEASUREID }}
       - run: npm test
