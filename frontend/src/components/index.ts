@@ -16,6 +16,7 @@ import SearchBar from "./admin/search-bar/search-bar";
 import ProfileSection from "./admin/profile-section/profile-section";
 import H2 from "./h2/h2";
 import Image from "./image/image";
+import Error from "./error/error";
 
 export {
   DeliveryMethod,
@@ -36,4 +37,5 @@ export {
   ProfileSection,
   H2,
   Image,
+  Error,
 };

@@ -1,9 +1,36 @@
 import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 
-import { Button, H2, Image, Input } from "../../components";
+import { Button, Error, H2, Image, Input } from "../../components";
+import { AuthService } from "../../services";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+import { RegisterInputs } from "../../types/auth/inputs";
 
 const Register = () => {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterInputs>();
+
+  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+    AuthService.registerWithEmail(data.fullName, data.email, data.password)
+      .then(() => {
+        toast.success("You account has been created successfully");
+        redirectToHome();
+      })
+      .catch(() => {
+        toast.error("There was an error while registering");
+      });
+  };
+
+  const redirectToHome = () => {
+    router.push("/ ");
+  };
+
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -18,49 +45,55 @@ const Register = () => {
               </div>
             </div>
 
-            <H2 text="Sign in to your account" />
+            <H2 text="Create your account" />
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" defaultValue="true" />
+          <form
+            className="mt-8 space-y-6"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
             <div className="rounded-md shadow-sm -space-y-px">
               <Input
-                name="email"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                }}
                 type="email"
                 placeholder="Email"
                 additionalStyles="rounded-t"
+                {...register("email", { required: "Email is required" })}
               />
 
               <Input
-                name="email"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                }}
-                type="email"
+                type="text"
                 placeholder="Name"
                 additionalStyles="rounded-0"
+                {...register("fullName", { required: "Full name is required" })}
               />
 
               <Input
-                name="password"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                }}
                 type="password"
                 placeholder="Password"
                 additionalStyles="rounded-b"
+                {...register("password", {
+                  required: true,
+                  minLength: {
+                    value: 6,
+                    message: "Password must be atleast 6 characters long",
+                  },
+                })}
               />
             </div>
 
-            <Button
-              title="Login"
-              onClick={(e) => {
-                console.log(e);
-              }}
-              size="small"
-            />
+            <div className="mt-2">
+              {errors.fullName && (
+                <Error message={errors.fullName.message as string} />
+              )}
+              {errors.email && (
+                <Error message={errors.email.message as string} />
+              )}
+              {errors.password && (
+                <Error message={errors.password.message as string} />
+              )}
+            </div>
+
+            <Button title="Login" size="small" type="submit" />
 
             <div className="flex items-center justify-between">
               <div className="text-sm">

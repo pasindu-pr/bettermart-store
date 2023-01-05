@@ -85,3 +85,5 @@ export type InputComponentProps = {
   placeholder?: string;
   additionalStyles?: string;
 };
+
+export type ErrorProps = { message: string };
