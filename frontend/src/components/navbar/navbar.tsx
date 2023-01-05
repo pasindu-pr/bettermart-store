@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   MenuIcon,
@@ -8,6 +8,9 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { AuthContext } from "../../context";
+import { AuthService } from "../../services";
+import toast from "react-hot-toast";
 
 const navigation = {
   categories: [
@@ -27,6 +30,18 @@ function classNames(...classes: string[]) {
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
+  const { user } = useContext(AuthContext);
+
+  const signOut = () => {
+    AuthService.signOut()
+      .then(() => {
+        toast.success("Signed out!");
+      })
+      .catch(() => {
+        toast.error("There was an error while sign out");
+      });
+  };
 
   return (
     <div className="bg-white">
@@ -71,18 +86,26 @@ export default function NavBar() {
               </div>
 
               <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                <div
-                  className="flow-root"
-                  onClick={() => router.push("/auth/login")}
-                >
-                  Create an account
-                </div>
-                <div
-                  className="flow-root"
-                  onClick={() => router.push("/auth/login")}
-                >
-                  Sign in
-                </div>
+                {!user ? (
+                  <>
+                    <div
+                      className="flow-root"
+                      onClick={() => router.push("/auth/login")}
+                    >
+                      Create an account
+                    </div>
+                    <div
+                      className="flow-root"
+                      onClick={() => router.push("/auth/login")}
+                    >
+                      Sign in
+                    </div>
+                  </>
+                ) : (
+                  <div className="flow-root" onClick={signOut}>
+                    Sign out
+                  </div>
+                )}
               </div>
             </div>
           </Transition.Child>
@@ -99,19 +122,30 @@ export default function NavBar() {
               </p>
 
               <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                <p
-                  className="cursor-pointer text-sm font-medium text-white hover:text-gray-100"
-                  onClick={() => router.push("/auth/register")}
-                >
-                  Create an account
-                </p>
-                <span className="h-6 w-px bg-gray-600" aria-hidden="true" />
-                <p
-                  className="cursor-pointer text-sm font-medium text-white hover:text-gray-100"
-                  onClick={() => router.push("/auth/login")}
-                >
-                  Sign in
-                </p>
+                {!user ? (
+                  <>
+                    <p
+                      className="cursor-pointer text-sm font-medium text-white hover:text-gray-100"
+                      onClick={() => router.push("/auth/register")}
+                    >
+                      Create an account
+                    </p>
+                    <span className="h-6 w-px bg-gray-600" aria-hidden="true" />
+                    <p
+                      className="cursor-pointer text-sm font-medium text-white hover:text-gray-100"
+                      onClick={() => router.push("/auth/login")}
+                    >
+                      Sign in
+                    </p>
+                  </>
+                ) : (
+                  <p
+                    onClick={signOut}
+                    className="cursor-pointer text-sm font-medium text-white hover:text-gray-100"
+                  >
+                    Sign out
+                  </p>
+                )}
               </div>
             </div>
           </div>
