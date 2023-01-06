@@ -7,21 +7,34 @@ import {
 } from "@heroicons/react/outline";
 import SidebarNavItem from "../sidebar-nav-item/sidebar-nav-item";
 import { uuid } from "../../../libs";
-
-const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "Products", href: "#", icon: ClockIcon, current: false },
-  { name: "Orders", href: "#", icon: ScaleIcon, current: false },
-  { name: "Payments", href: "#", icon: CreditCardIcon, current: false },
-];
+import { useRouter } from "next/router";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Sidebar = () => {
+  const router = useRouter();
+
+  const navigation = [
+    {
+      name: "Home",
+      href: "/admin",
+      icon: HomeIcon,
+      current: router.pathname === "/admin",
+    },
+    {
+      name: "Products",
+      href: "/admin/products",
+      icon: ClockIcon,
+      current: router.pathname === "/admin/products",
+    },
+    { name: "Orders", href: "#", icon: ScaleIcon, current: false },
+    { name: "Payments", href: "#", icon: CreditCardIcon, current: false },
+  ];
+
   return (
-    <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
+    <div className="hidden lg:flex lg:w-64 lg:flex-col lg:min-h-screen lg:inset-y-0">
       <div className="flex flex-col flex-grow bg-cyan-700 pt-5 pb-4 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-4">
           <img

@@ -17,6 +17,7 @@ import ProfileSection from "./admin/profile-section/profile-section";
 import H2 from "./h2/h2";
 import Image from "./image/image";
 import Error from "./error/error";
+import ImageUploadInput from "./image-upload-input/image-upload-input";
 
 export {
   DeliveryMethod,
@@ -38,4 +39,5 @@ export {
   H2,
   Image,
   Error,
+  ImageUploadInput,
 };

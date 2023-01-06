@@ -87,3 +87,7 @@ export type InputComponentProps = {
 };
 
 export type ErrorProps = { message: string };
+
+export type ImageUploadProps = {
+  label: string;
+};

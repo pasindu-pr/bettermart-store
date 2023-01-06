@@ -8,6 +8,7 @@ import { SelectOption } from "./components/selectoptions";
 import { SelectProps } from "./components/props";
 import { ButtonProps } from "./components/props";
 import { InputComponentProps } from "./components/props";
+import { AddProductInputs } from "./products/inputs";
 
 export type {
   CheckoutItemProps,
@@ -20,4 +21,5 @@ export type {
   SelectProps,
   ButtonProps,
   InputComponentProps,
+  AddProductInputs,
 };
