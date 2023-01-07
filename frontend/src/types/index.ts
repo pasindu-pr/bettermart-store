@@ -9,6 +9,7 @@ import { SelectProps } from "./components/props";
 import { ButtonProps } from "./components/props";
 import { InputComponentProps } from "./components/props";
 import { AddProductInputs } from "./products/inputs";
+import { CloudinaryUploadResponse } from "./responses/cloudinary-upload-response";
 
 export type {
   CheckoutItemProps,
@@ -22,4 +23,5 @@ export type {
   ButtonProps,
   InputComponentProps,
   AddProductInputs,
+  CloudinaryUploadResponse,
 };

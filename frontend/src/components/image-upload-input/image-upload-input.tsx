@@ -1,7 +1,12 @@
 import React from "react";
+
 import { ImageUploadProps } from "../../types/components/props";
 
-const ImageUploadInput = ({ label }: ImageUploadProps) => {
+const ImageUploadInput = ({
+  label,
+  uploadProgress,
+  onChange,
+}: ImageUploadProps) => {
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700">{label}</label>
@@ -32,6 +37,7 @@ const ImageUploadInput = ({ label }: ImageUploadProps) => {
                 name="file-upload"
                 type="file"
                 className="sr-only"
+                onChange={onChange}
               />
             </label>
             <p className="pl-1">or drag and drop</p>
@@ -39,10 +45,12 @@ const ImageUploadInput = ({ label }: ImageUploadProps) => {
           <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
           <div className="relative pt-1">
             <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-pink-200">
-              <div
-                style={{ width: "30%" }}
-                className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"
-              ></div>
+              {uploadProgress !== 0 && (
+                <div
+                  style={{ width: `${uploadProgress}%` }}
+                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"
+                ></div>
+              )}
             </div>
           </div>
         </div>
