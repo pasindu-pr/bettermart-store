@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { uuid } from "../../../libs";
 
@@ -15,7 +16,7 @@ const SidebarNavItem = ({
   current: boolean;
 }) => {
   return (
-    <a
+    <Link
       key={uuid()}
       href={link}
       className={classNames(
@@ -27,7 +28,7 @@ const SidebarNavItem = ({
       aria-current={current ? "page" : undefined}
     >
       {name}
-    </a>
+    </Link>
   );
 };
 
