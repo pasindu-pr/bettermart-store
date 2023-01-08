@@ -19,7 +19,7 @@ namespace Bettermart.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
+        
         [HttpGet]
         public async Task<BaseResponse<List<GetProductDto>>> GetProducts()
         {
