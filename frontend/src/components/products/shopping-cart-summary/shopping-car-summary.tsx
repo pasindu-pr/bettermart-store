@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 import { ShoppingCartSummaryProps } from "../../../types/components/props";
 import Button from "../../button/button";
@@ -10,6 +11,12 @@ const ShoppingCartSummary = ({
   taxEstimate,
   orderTotal,
 }: ShoppingCartSummaryProps) => {
+  const router = useRouter();
+
+  const handleCheckoutClick = () => {
+    router.push("/orders/checkout");
+  };
+
   return (
     <section
       aria-labelledby="summary-heading"
@@ -48,13 +55,7 @@ const ShoppingCartSummary = ({
       </dl>
 
       <div className="mt-6">
-        <Button
-          type="submit"
-          onClick={() => {
-            console.log("");
-          }}
-          title="Checkout"
-        />
+        <Button type="button" onClick={handleCheckoutClick} title="Checkout" />
       </div>
     </section>
   );

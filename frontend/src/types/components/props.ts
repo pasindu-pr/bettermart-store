@@ -56,7 +56,8 @@ export type CheckoutItemProps = {
   name: string;
   imageSrc: string;
   imageAlt: string;
-  price: string;
+  price: number;
+  quantity: number;
 };
 
 export type SelectProps = {
