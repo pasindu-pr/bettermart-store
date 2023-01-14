@@ -2,74 +2,17 @@ import { Fragment, useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
-
-const product = {
-  name: "Zip Tote Basket",
-  price: "$140",
-  rating: 4,
-  images: [
-    {
-      id: 1,
-      name: "Angled view",
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-      alt: "Angled front view with bag zipped and handles upright.",
-    },
-    // More images...
-  ],
-  colors: [
-    {
-      name: "Washed Black",
-      bgColor: "bg-gray-700",
-      selectedColor: "ring-gray-700",
-    },
-    { name: "White", bgColor: "bg-white", selectedColor: "ring-gray-400" },
-    {
-      name: "Washed Gray",
-      bgColor: "bg-gray-500",
-      selectedColor: "ring-gray-500",
-    },
-  ],
-  description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-  `,
-  details: [
-    {
-      name: "Features",
-      items: [
-        "Multiple strap configurations",
-        "Spacious interior with top zip",
-        "Leather handle and tabs",
-        "Interior dividers",
-        "Stainless strap loops",
-        "Double stitched construction",
-        "Water-resistant",
-      ],
-    },
-    // More sections...
-  ],
-};
-const relatedProducts = [
-  {
-    id: 1,
-    name: "Zip Tote Basket",
-    color: "White and black",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
-    imageAlt:
-      "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
-    price: "$140",
-  },
-  // More products...
-];
+import { GetServerSideProps, NextPage } from "next";
+import { ProductService } from "../../../services";
+import { ProductDetailPageProps } from "../../../types/pages/props";
+import { uuid } from "../../../libs";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetailsPage() {
+const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
   const [open, setOpen] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 
   return (
     <div className="bg-white">
@@ -80,43 +23,14 @@ export default function ProductDetailsPage() {
             {/* Image gallery */}
             <Tab.Group as="div" className="flex flex-col-reverse">
               {/* Image selector */}
-              <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
-                <Tab.List className="grid grid-cols-4 gap-6">
-                  {product.images.map((image) => (
-                    <Tab
-                      key={image.id}
-                      className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
-                    >
-                      {({ selected }) => (
-                        <>
-                          <span className="sr-only">{image.name}</span>
-                          <span className="absolute inset-0 rounded-md overflow-hidden">
-                            <img
-                              src={image.src}
-                              alt=""
-                              className="w-full h-full object-center object-cover"
-                            />
-                          </span>
-                          <span
-                            className={classNames(
-                              selected ? "ring-indigo-500" : "ring-transparent",
-                              "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none"
-                            )}
-                            aria-hidden="true"
-                          />
-                        </>
-                      )}
-                    </Tab>
-                  ))}
-                </Tab.List>
-              </div>
+              <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none"></div>
 
               <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
-                {product.images.map((image) => (
-                  <Tab.Panel key={image.id}>
+                {product.image.map((image) => (
+                  <Tab.Panel key={uuid()}>
                     <img
-                      src={image.src}
-                      alt={image.alt}
+                      src={image}
+                      alt={product.name}
                       className="w-full h-full object-center object-cover sm:rounded-lg"
                     />
                   </Tab.Panel>
@@ -138,7 +52,7 @@ export default function ProductDetailsPage() {
               {/* Reviews */}
               <div className="mt-3">
                 <h3 className="sr-only">Reviews</h3>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <div className="flex items-center">
                     {[0, 1, 2, 3, 4].map((rating) => (
                       <StarIcon
@@ -154,7 +68,7 @@ export default function ProductDetailsPage() {
                     ))}
                   </div>
                   <p className="sr-only">{product.rating} out of 5 stars</p>
-                </div>
+                </div> */}
               </div>
 
               <div className="mt-6">
@@ -171,7 +85,7 @@ export default function ProductDetailsPage() {
                 <div>
                   <h3 className="text-sm text-gray-600">Color</h3>
 
-                  <RadioGroup
+                  {/* <RadioGroup
                     value={selectedColor}
                     onChange={setSelectedColor}
                     className="mt-2"
@@ -206,7 +120,7 @@ export default function ProductDetailsPage() {
                         </RadioGroup.Option>
                       ))}
                     </div>
-                  </RadioGroup>
+                  </RadioGroup> */}
                 </div>
 
                 <div className="mt-10 flex sm:flex-col1">
@@ -236,7 +150,7 @@ export default function ProductDetailsPage() {
                 </h2>
 
                 <div className="border-t divide-y divide-gray-200">
-                  {product.details.map((detail) => (
+                  {/* {product.details.map((detail) => (
                     <Disclosure as="div" key={detail.name}>
                       {({ open }) => (
                         <>
@@ -278,7 +192,7 @@ export default function ProductDetailsPage() {
                         </>
                       )}
                     </Disclosure>
-                  ))}
+                  ))} */}
                 </div>
               </section>
             </div>
@@ -296,7 +210,7 @@ export default function ProductDetailsPage() {
             </h2>
 
             <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-              {relatedProducts.map((product) => (
+              {/* {relatedProducts.map((product) => (
                 <div key={product.id}>
                   <div className="relative">
                     <div className="relative w-full h-72 rounded-lg overflow-hidden">
@@ -334,11 +248,20 @@ export default function ProductDetailsPage() {
                     </a>
                   </div>
                 </div>
-              ))}
+              ))} */}
             </div>
           </section>
         </div>
       </main>
     </div>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await ProductService.getProduct(context.params?.id as string);
+  const product = res.data.data;
+
+  return { props: { product } };
+};
+
+export default ProductDetailsPage;

@@ -1,3 +1,3 @@
-import { ProductResponse } from "./product-response";
+import { ProductsResponse, ProductResponse } from "./product-response";
 
-export type { ProductResponse };
+export type { ProductsResponse, ProductResponse };
