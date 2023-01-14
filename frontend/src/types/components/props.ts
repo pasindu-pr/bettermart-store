@@ -12,7 +12,7 @@ export type H2Props = {
 export type ProductCardProps = {
   id: string;
   name: string;
-  price: string;
+  price: number;
   smallDescription?: string;
   imageSrc: string;
   imageAlt: string;

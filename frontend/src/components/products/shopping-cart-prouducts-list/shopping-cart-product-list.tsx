@@ -20,7 +20,7 @@ const ShoppingCartProductList = ({ products }: { products: ProductCard[] }) => {
             key={uuid()}
             id="sdsd"
             name={product.name}
-            price={product.price}
+            price={Number(product.price)}
             smallDescription="Sample Description"
             imageSrc={product.imageSrc}
             imageAlt={product.imageAlt}
