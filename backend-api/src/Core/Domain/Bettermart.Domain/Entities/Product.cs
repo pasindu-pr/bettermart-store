@@ -17,7 +17,7 @@ namespace Bettermart.Domain.Entities
         public string Category { get; set; } = string.Empty;
 
         [BsonElement("image")]
-        public string[] Images { get; set; } = Array.Empty<string>();
+        public string[] Image { get; set; } = Array.Empty<string>();
 
         [BsonElement("price")]
         public float Price { get; set; }
