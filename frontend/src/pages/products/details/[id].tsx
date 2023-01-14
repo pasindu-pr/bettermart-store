@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { HeartIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
@@ -6,6 +6,10 @@ import { GetServerSideProps, NextPage } from "next";
 import { ProductService } from "../../../services";
 import { ProductDetailPageProps } from "../../../types/pages/props";
 import { uuid } from "../../../libs";
+import { Button, Input } from "../../../components";
+import { CartItem } from "../../../types/components";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { CartContext } from "../../../context/cart-context";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -13,6 +17,25 @@ function classNames(...classes: string[]) {
 
 const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
   const [open, setOpen] = useState(false);
+  const { addItems } = useContext(CartContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CartItem>();
+
+  const onSubmit: SubmitHandler<CartItem> = (data) => {
+    const item: CartItem = {
+      ...data,
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image[0],
+    };
+
+    addItems(item);
+  };
 
   return (
     <div className="bg-white">
@@ -46,7 +69,7 @@ const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
 
               <div className="mt-3">
                 <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl text-gray-900">{product.price}</p>
+                <p className="text-3xl text-gray-900">{product.price} $</p>
               </div>
 
               {/* Reviews */}
@@ -80,12 +103,12 @@ const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
                 />
               </div>
 
-              <form className="mt-6">
+              <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
                 {/* Colors */}
-                <div>
+                {/* <div>
                   <h3 className="text-sm text-gray-600">Color</h3>
 
-                  {/* <RadioGroup
+                  <RadioGroup
                     value={selectedColor}
                     onChange={setSelectedColor}
                     className="mt-2"
@@ -120,27 +143,22 @@ const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
                         </RadioGroup.Option>
                       ))}
                     </div>
-                  </RadioGroup> */}
-                </div>
+                  </RadioGroup>
+                </div> */}
 
                 <div className="mt-10 flex sm:flex-col1">
-                  <button
-                    type="submit"
-                    className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
-                  >
-                    Add to bag
-                  </button>
-
-                  <button
-                    type="button"
-                    className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                  >
-                    <HeartIcon
-                      className="h-6 w-6 flex-shrink-0"
-                      aria-hidden="true"
+                  <div className="flex flex-col gap-2">
+                    <Input
+                      label="Quantity"
+                      type="number"
+                      additionalStyles="rounded"
+                      min="0"
+                      max={product.stockCount}
+                      {...register("quantity")}
                     />
-                    <span className="sr-only">Add to favorites</span>
-                  </button>
+
+                    <Button title="Add to cart" type="submit" size="small" />
+                  </div>
                 </div>
               </form>
 
