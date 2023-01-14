@@ -1,11 +1,18 @@
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { Button, CheckoutItem, Input } from "../../components";
 import CheckoutSummary from "../../components/orders/checkout-summary/checkout-summary";
 import { CartContext } from "../../context/cart-context";
 import { uuid } from "../../libs";
 import { CheckoutInfo } from "../../types/orders";
+import { StripeProduct } from "../../types/products";
+
+const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+const stripePromise = loadStripe(publishableKey as string);
 
 export default function CheckoutPage() {
   const { items } = useContext(CartContext);
@@ -59,6 +66,34 @@ export default function CheckoutPage() {
       total: total,
     });
   }, [items]);
+
+  const createCheckOutSession = async () => {
+    const checkoutItems: StripeProduct[] =
+      items?.map((item) => {
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              images: [item.image],
+              name: item.name,
+            },
+            unit_amount: item.price * 100,
+          },
+          quantity: item.quantity,
+        };
+      }) || [];
+
+    const stripe = await stripePromise;
+    const checkoutSession = await axios.post("/api/create-stripe-session", {
+      items: checkoutItems,
+    });
+    const result = await stripe?.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+    if (result?.error) {
+      toast.error("Something went wrong!");
+    }
+  };
 
   return (
     <div className="bg-gray-50">
@@ -191,9 +226,7 @@ export default function CheckoutPage() {
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <Button
                   type="submit"
-                  onClick={() => {
-                    console.log("");
-                  }}
+                  onClick={createCheckOutSession}
                   title="Pay"
                 />
               </div>
