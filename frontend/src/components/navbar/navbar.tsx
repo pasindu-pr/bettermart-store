@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { AuthContext } from "../../context";
 import { AuthService } from "../../services";
 import toast from "react-hot-toast";
+import { CartContext } from "../../context/cart-context";
 
 const navigation = {
   categories: [
@@ -32,6 +33,7 @@ export default function NavBar() {
   const router = useRouter();
 
   const { user } = useContext(AuthContext);
+  const { addItems, removeItems, items } = useContext(CartContext);
 
   const signOut = () => {
     AuthService.signOut()
@@ -268,7 +270,7 @@ export default function NavBar() {
                             aria-hidden="true"
                           />
                           <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                            0
+                            {items?.length}
                           </span>
                         </p>
                       </div>
