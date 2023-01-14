@@ -9,10 +9,6 @@ import SidebarNavItem from "../sidebar-nav-item/sidebar-nav-item";
 import { uuid } from "../../../libs";
 import { useRouter } from "next/router";
 
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const Sidebar = () => {
   const router = useRouter();
 

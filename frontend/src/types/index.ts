@@ -1,7 +1,7 @@
 import { PageLayoutProps } from "./components/props";
 import { ProductCardProps } from "./components/props";
 import { OrderSummaryItemProps } from "./components/props";
-import { Product } from "./products/product";
+import { ProductCard } from "./products/product-card";
 import { CheckoutItemProps } from "./components/props";
 import { DeliveryMethod } from "./orders/deliveryMethod";
 import { SelectOption } from "./components/selectoptions";
@@ -16,7 +16,7 @@ export type {
   PageLayoutProps,
   ProductCardProps,
   OrderSummaryItemProps,
-  Product,
+  ProductCard,
   DeliveryMethod,
   SelectOption,
   SelectProps,

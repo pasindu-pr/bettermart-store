@@ -1,10 +1,10 @@
 import React from "react";
 
 import { uuid } from "../../../libs";
-import { Product } from "../../../types";
+import { ProductCard } from "../../../types";
 import ShoppingCartItem from "../shopping-cart-item/shopping-cart-item";
 
-const ShoppingCartProductList = ({ products }: { products: Product[] }) => {
+const ShoppingCartProductList = ({ products }: { products: ProductCard[] }) => {
   return (
     <section aria-labelledby="cart-heading" className="lg:col-span-7">
       <h2 id="cart-heading" className="sr-only">

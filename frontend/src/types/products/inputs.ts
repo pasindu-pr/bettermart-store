@@ -1,6 +1,6 @@
 export type AddProductInputs = {
   name: string;
   price: number;
-  quantity: number;
+  stockCount: number;
   description: string;
 };
