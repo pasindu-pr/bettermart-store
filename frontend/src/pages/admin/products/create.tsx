@@ -1,29 +1,49 @@
+import { AxiosResponse } from "axios";
 import React, { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { Button, ImageUploadInput, Input } from "../../../components";
 import { AdminLayout } from "../../../layouts";
-import { UploadService } from "../../../services";
-import { AddProductInputs } from "../../../types";
+import { ProductService, UploadService } from "../../../services";
+import { CreateProduct } from "../../../types/products";
 
 const Create = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddProductInputs>();
-  const [imageSources, setImageSources] = useState({
+  } = useForm<CreateProduct>();
+  const [imageSources, setImageSources] = useState<{
+    image1: string;
+    image2: string;
+    image3: string;
+    image4: string;
+  }>({
     image1: "",
     image2: "",
     image3: "",
     image4: "",
   });
 
-  const onSubmit: SubmitHandler<AddProductInputs> = (data) => {
-    const product = {
+  const onSubmit: SubmitHandler<CreateProduct> = (data) => {
+    const product: CreateProduct = {
       ...data,
-      images: imageSources,
+      image: [
+        imageSources.image1,
+        imageSources.image2,
+        imageSources.image3,
+        imageSources.image4,
+      ],
     };
+
+    ProductService.createProduct(product)
+      .then(() => {
+        toast.success("Product created successfully");
+      })
+      .catch(() => {
+        toast.error("There was an error while creating the product");
+      });
   };
 
   const [imageOneUploadProgress, setImageOneUploadProgress] =
@@ -67,7 +87,8 @@ const Create = () => {
 
   const handleImageFourSelect = (e: ChangeEvent<HTMLInputElement>) => {
     const file: any = (e.target as HTMLInputElement)?.files?.[0];
-    uploadImage(file, setImageThreeUploadProgress).then((res) => {
+
+    UploadService.uploadImage(file, setImageFourUploadProgress).then((res) => {
       setImageSources((prevState) => ({
         ...prevState,
         image4: res.data.secure_url,
@@ -87,7 +108,7 @@ const Create = () => {
   return (
     <>
       <AdminLayout>
-        <div>
+        <div className="h-full">
           <div className="mt-5 md:col-span-2 md:mt-0">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="shadow sm:overflow-hidden sm:rounded-md">
@@ -113,10 +134,28 @@ const Create = () => {
 
                     <div className="col-span-4">
                       <Input
-                        label="Quantity"
+                        label="Stock Count"
                         type="number"
                         additionalStyles="rounded"
-                        {...register("quantity")}
+                        {...register("stockCount")}
+                      />
+                    </div>
+
+                    <div className="col-span-4">
+                      <Input
+                        label="Category"
+                        type="text"
+                        additionalStyles="rounded"
+                        {...register("category")}
+                      />
+                    </div>
+
+                    <div className="col-span-4">
+                      <Input
+                        label="Brand"
+                        type="text"
+                        additionalStyles="rounded"
+                        {...register("brand")}
                       />
                     </div>
                   </div>
@@ -148,21 +187,27 @@ const Create = () => {
                       label="Image 1"
                       uploadProgress={imageOneUploadProgress}
                       onChange={handleImageOneSelect}
+                      id="image1"
                     />
+
                     <ImageUploadInput
                       label="Image 2"
                       uploadProgress={imageTwouploadProgress}
                       onChange={handleImageTwoSelect}
+                      id="image2"
                     />
+
                     <ImageUploadInput
                       label="Image 3"
                       uploadProgress={imageThreeuploadProgress}
                       onChange={handleImageThreeSelect}
+                      id="image3"
                     />
                     <ImageUploadInput
                       label="Image 4"
                       uploadProgress={imageTFourploadProgress}
                       onChange={handleImageFourSelect}
+                      id="image4"
                     />
                   </div>
                 </div>

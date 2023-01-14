@@ -3,6 +3,7 @@ import React from "react";
 import { ImageUploadProps } from "../../types/components/props";
 
 const ImageUploadInput = ({
+  id,
   label,
   uploadProgress,
   onChange,
@@ -28,13 +29,13 @@ const ImageUploadInput = ({
           </svg>
           <div className="flex text-sm text-gray-600">
             <label
-              htmlFor="file-upload"
+              htmlFor={id}
               className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
             >
               <span>Upload a file</span>
               <input
-                id="file-upload"
-                name="file-upload"
+                id={id}
+                name={id}
                 type="file"
                 className="sr-only"
                 onChange={onChange}

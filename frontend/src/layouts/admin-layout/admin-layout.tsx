@@ -11,10 +11,8 @@ import SidebarMobile from "../../components/admin/sidebar-mobile/sidebar-mobile"
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  console.log(sidebarOpen);
-
   return (
-    <div className="min-h-full w-full lg:flex">
+    <div className="min-h-full w-full lg:flex h-screen overflow-y-hidden">
       <div>
         <SidebarMobile />
         <SideBar />

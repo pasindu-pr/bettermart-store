@@ -89,6 +89,7 @@ export type InputComponentProps = {
 export type ErrorProps = { message: string };
 
 export type ImageUploadProps = {
+  id: string;
   label: string;
   uploadProgress: number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
