@@ -18,8 +18,8 @@ export type ProductCardProps = {
   imageSrc: string;
   imageAlt: string;
   shippingTime?: string;
-  quantity: number;
-  removeItem: (id: string) => void;
+  quantity?: number;
+  removeItem?: (id: string) => void;
 };
 
 export type OrderSummaryItemProps = {

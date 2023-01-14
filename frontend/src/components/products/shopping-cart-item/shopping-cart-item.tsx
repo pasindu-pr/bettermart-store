@@ -38,7 +38,7 @@ const ShoppingCartItem = ({
             <div className="absolute top-0 right-0">
               <button
                 onClick={() => {
-                  removeItem(id);
+                  if (removeItem) removeItem(id);
                 }}
                 type="button"
                 className="-m-2 p-2 inline-flex text-gray-400 hover:text-gray-500"
