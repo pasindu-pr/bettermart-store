@@ -3,7 +3,6 @@ import { ProductCardProps } from "./components/props";
 import { OrderSummaryItemProps } from "./components/props";
 import { ProductCard } from "./products/product-card";
 import { CheckoutItemProps } from "./components/props";
-import { DeliveryMethod } from "./orders/deliveryMethod";
 import { SelectOption } from "./components/selectoptions";
 import { SelectProps } from "./components/props";
 import { ButtonProps } from "./components/props";
@@ -17,7 +16,6 @@ export type {
   ProductCardProps,
   OrderSummaryItemProps,
   ProductCard,
-  DeliveryMethod,
   SelectOption,
   SelectProps,
   ButtonProps,

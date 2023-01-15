@@ -17,7 +17,7 @@ async function CreateStripeSession(req: NextApiRequest, res: NextApiResponse) {
   const redirectURL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://stripe-checkout-next-js-demo.vercel.app";
+      : process.env.FRONTEND_DOMAIN;
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],

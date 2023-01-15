@@ -7,7 +7,6 @@ import ShoppingCartItem from "./products/shopping-cart-item/shopping-cart-item";
 import OrderSummaryItem from "./orders/order-summary-item/order-summary-item";
 import ShoppingCartProductList from "./products/shopping-cart-prouducts-list/shopping-cart-product-list";
 import Input from "./input/input";
-import DeliveryMethod from "./orders/delivery-method/delivery-method";
 import CheckoutItem from "./orders/checkout-item/checkout-item";
 import AccountSummary from "./admin/account-summary/account-summary";
 import SideBar from "./admin/sidebar/sidebar";
@@ -20,7 +19,6 @@ import Error from "./error/error";
 import ImageUploadInput from "./image-upload-input/image-upload-input";
 
 export {
-  DeliveryMethod,
   Input,
   Select,
   NavBar,
