@@ -50,6 +50,8 @@ export type ShoppingCartSummaryProps = {
     title: string;
     amount: number;
   };
+
+  onClick: () => void;
 };
 
 export type CheckoutItemProps = {

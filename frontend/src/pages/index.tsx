@@ -31,7 +31,7 @@ const Home: NextPage<HomePageProps> = ({ products }) => {
       </div>
       {/* Treding Products */}
 
-      <div className="bg-white">
+      {/* <div className="bg-white">
         <div className="max-w-2xl mx-auto py-4 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="md:flex md:items-center md:justify-between">
             <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
@@ -40,7 +40,7 @@ const Home: NextPage<HomePageProps> = ({ products }) => {
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-            {/* {products.map((product) => (
+            {products.map((product) => (
               <ProductCard
                 id="sdsd"
                 name={product.name}
@@ -49,7 +49,7 @@ const Home: NextPage<HomePageProps> = ({ products }) => {
                 imageSrc={product.imageSrc}
                 imageAlt={product.imageAlt}
               />
-            ))} */}
+            ))}
           </div>
 
           <div className="mt-8 text-sm md:hidden">
@@ -68,7 +68,7 @@ const Home: NextPage<HomePageProps> = ({ products }) => {
           <h2 className="sr-only">Products</h2>
 
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {/* {products.map((product) => (
+            {products.map((product) => (
               <ProductsCardTall
                 id={"random"}
                 name={product.name}
@@ -77,10 +77,10 @@ const Home: NextPage<HomePageProps> = ({ products }) => {
                 imageSrc={product.imageSrc}
                 imageAlt={product.imageAlt}
               />
-            ))} */}
+            ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </PageLayout>
   );
 };
