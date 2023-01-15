@@ -1,7 +1,15 @@
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { loadStripe } from "@stripe/stripe-js";
+
 import { ShoppingCartProductList } from "../../components";
 import ShoppingCartSummary from "../../components/products/shopping-cart-summary/shopping-car-summary";
 import { CartContext } from "../../context/cart-context";
+import { StripeProduct } from "../../types/products";
+
+const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+const stripePromise = loadStripe(publishableKey as string);
 
 export default function ShoppingCart() {
   const { items, removeItems } = useContext(CartContext);
@@ -22,11 +30,7 @@ export default function ShoppingCart() {
         0
       ) || 0;
 
-    const shipping = !isCartEmpty
-      ? subTotal > 100
-        ? 0
-        : (subTotal * 8) / 100
-      : 0;
+    const shipping = !isCartEmpty ? subTotal + 5 : 0;
     const tax = !isCartEmpty ? (subTotal * 12) / 100 : 0;
     const total = subTotal + shipping + tax;
 
@@ -37,6 +41,35 @@ export default function ShoppingCart() {
       total: total,
     });
   }, [items]);
+
+  const createCheckOutSession = async () => {
+    const checkoutItems: StripeProduct[] =
+      items?.map((item) => {
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              images: [item.image],
+              name: item.name,
+            },
+            unit_amount: item.price * 100,
+          },
+          quantity: item.quantity,
+        };
+      }) || [];
+
+    const stripe = await stripePromise;
+    const checkoutSession = await axios.post("/api/create-stripe-session", {
+      items: checkoutItems,
+      shipping: order.shipping,
+    });
+    const result = await stripe?.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+    if (result?.error) {
+      toast.error("Something went wrong!");
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -59,6 +92,7 @@ export default function ShoppingCart() {
             }}
             taxEstimate={{ title: "Tax estimate", amount: order.tax }}
             orderTotal={{ title: "Total", amount: order.total }}
+            onClick={createCheckOutSession}
           />
         </form>
       </div>

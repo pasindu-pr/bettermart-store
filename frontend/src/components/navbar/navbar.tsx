@@ -1,5 +1,5 @@
 import { Fragment, useContext, useState } from "react";
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   MenuIcon,
   SearchIcon,
@@ -12,28 +12,14 @@ import { AuthContext } from "../../context";
 import { AuthService } from "../../services";
 import toast from "react-hot-toast";
 import { CartContext } from "../../context/cart-context";
-
-const navigation = {
-  categories: [
-    {
-      name: "Women",
-    },
-    {
-      name: "Men",
-    },
-  ],
-};
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import Link from "next/link";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const { user } = useContext(AuthContext);
-  const { addItems, removeItems, items } = useContext(CartContext);
+  const { items } = useContext(CartContext);
 
   const signOut = () => {
     AuthService.signOut()
@@ -47,7 +33,6 @@ export default function NavBar() {
 
   return (
     <div className="bg-white">
-      {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -152,52 +137,21 @@ export default function NavBar() {
             </div>
           </div>
 
-          {/* Secondary navigation */}
           <div className="bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="border-b border-gray-200">
                 <div className="h-16 flex items-center justify-between">
-                  {/* Logo (lg+) */}
                   <div className="hidden lg:flex lg:items-center">
-                    <a href="#">
+                    <Link href="/">
                       <span className="sr-only">Workflow</span>
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                        src="/logo/bettermart-logo.png"
                         alt=""
                       />
-                    </a>
+                    </Link>
                   </div>
 
-                  <div className="hidden h-full lg:flex">
-                    {/* Mega menus */}
-                    <Popover.Group className="ml-8">
-                      <div className="h-full flex justify-center space-x-8">
-                        {navigation.categories.map((category, categoryIdx) => (
-                          <Popover key={category.name} className="flex">
-                            {({ open }) => (
-                              <>
-                                <div className="relative flex">
-                                  <Popover.Button
-                                    className={classNames(
-                                      open
-                                        ? "border-indigo-600 text-indigo-600"
-                                        : "border-transparent text-gray-700 hover:text-gray-800",
-                                      "relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
-                                    )}
-                                  >
-                                    {category.name}
-                                  </Popover.Button>
-                                </div>
-                              </>
-                            )}
-                          </Popover>
-                        ))}
-                      </div>
-                    </Popover.Group>
-                  </div>
-
-                  {/* Mobile menu and search (lg-) */}
                   <div className="flex-1 flex items-center lg:hidden">
                     <button
                       type="button"
@@ -207,22 +161,12 @@ export default function NavBar() {
                       <span className="sr-only">Open menu</span>
                       <MenuIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
-
-                    {/* Search */}
-                    <a
-                      href="#"
-                      className="ml-2 p-2 text-gray-400 hover:text-gray-500"
-                    >
-                      <span className="sr-only">Search</span>
-                      <SearchIcon className="w-6 h-6" aria-hidden="true" />
-                    </a>
                   </div>
 
-                  {/* Logo (lg-) */}
                   <a href="#" className="lg:hidden">
                     <span className="sr-only">Workflow</span>
                     <img
-                      src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                      src="/logo/bettermart-logo.png"
                       alt=""
                       className="h-8 w-auto"
                     />
@@ -231,26 +175,16 @@ export default function NavBar() {
                   <div className="flex-1 flex items-center justify-end">
                     <div className="flex items-center lg:ml-8">
                       <div className="flex space-x-8">
-                        <div className="hidden lg:flex">
-                          <a
-                            href="#"
-                            className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                          >
-                            <span className="sr-only">Search</span>
-                            <SearchIcon
-                              className="w-6 h-6"
-                              aria-hidden="true"
-                            />
-                          </a>
-                        </div>
-
                         <div className="flex">
                           <a
                             href="#"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
                           >
                             <span className="sr-only">Account</span>
-                            <UserIcon className="w-6 h-6" aria-hidden="true" />
+                            <UserIcon
+                              className="w-6 h-6 text-[#5263f3]"
+                              aria-hidden="true"
+                            />
                           </a>
                         </div>
                       </div>
@@ -266,7 +200,7 @@ export default function NavBar() {
                           className="group -m-2 p-2 flex items-center cursor-pointer"
                         >
                           <ShoppingCartIcon
-                            className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                            className="flex-shrink-0 h-6 w-6 text-[#5263f3] text-gray-400 group-hover:text-gray-500"
                             aria-hidden="true"
                           />
                           <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
