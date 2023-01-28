@@ -15,9 +15,14 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: ChangeWorkingDirectory@1
+# Command Line v2
+# Run a command line script using Bash on Linux and macOS and cmd.exe on Windows.
+- task: CmdLine@2
   inputs:
-    workingDirectory: ./backend-api/src
+    workingDirectory: './backend-api/src'
+  # Advanced
+    #workingDirectory: # string. Working Directory. 
+    #failOnStderr: false # boolean. Fail on Standard Error. Default: false.
 
 - task: NuGetToolInstaller@1
 
