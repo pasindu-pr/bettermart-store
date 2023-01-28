@@ -15,7 +15,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: ChangeWorkingDirectory
+- task: ChangeWorkingDirectory@1
   inputs:
     workingDirectory: ./backend-api/src
 
