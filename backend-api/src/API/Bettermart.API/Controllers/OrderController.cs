@@ -1,6 +1,4 @@
-﻿using Bettermart_Application.DTOs.Orders;
-using Bettermart_Application.DTOs.Products;
-using Bettermart_Application.Features.Orders.Commands;
+﻿using Bettermart_Application.Features.Orders.Commands;
 using Bettermart_Application.Responses;
 using MediatR; 
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +17,9 @@ namespace Bettermart.API.Controllers
         }
 
         [HttpPost]
-        public async Task<BaseResponse<GetProductDto>> CreateOrder(CreateOrderDto products)
+        public async Task<BaseResponse<String>> CreateOrder(String[] productIds)
         {
-            var response = await _mediator.Send(new CreateOrderCommand { products = products});
+            var response = await _mediator.Send(new CreateOrderCommand { products = productIds });
             return response;
         }
     }

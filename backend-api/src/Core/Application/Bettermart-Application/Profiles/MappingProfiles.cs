@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Bettermart.Domain.Entities;
+using Bettermart.Domain.Entities; 
 using Bettermart_Application.DTOs.Products;
 
 namespace Bettermart_Application.Profiles
@@ -9,7 +9,8 @@ namespace Bettermart_Application.Profiles
         public MappingProfiles()
         {
             CreateMap<Product, GetProductDto>().ReverseMap();
-            CreateMap<CreateProductDto, Product>().ReverseMap();
+            CreateMap<CreateProductDto, Product>().ReverseMap(); 
+            CreateMap<UpdateProductDto, Product>().ReverseMap();
             CreateMap<UpdateProductDto, Product>().ReverseMap();
         }
     }
