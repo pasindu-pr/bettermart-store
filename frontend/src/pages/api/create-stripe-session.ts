@@ -26,6 +26,9 @@ async function CreateStripeSession(req: NextApiRequest, res: NextApiResponse) {
     mode: "payment",
     success_url: redirectURL + "?status=success",
     cancel_url: redirectURL + "?status=cancel",
+    metadata: {
+      orderId: "123",
+    },
     shipping_options: [
       {
         shipping_rate_data: {

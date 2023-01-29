@@ -1,4 +1,5 @@
 ﻿using Bettermart.Domain.Contracts;
+using MongoDB.Bson;
 using System.Linq.Expressions;
 
 namespace Bettermart_Application.Contracts
@@ -24,7 +25,7 @@ namespace Bettermart_Application.Contracts
 
         void InsertOne(TDocument document);
 
-        Task InsertOneAsync(TDocument document);
+        Task<ObjectId> InsertOneAsync(TDocument document);
 
         void InsertMany(ICollection<TDocument> documents);
 
