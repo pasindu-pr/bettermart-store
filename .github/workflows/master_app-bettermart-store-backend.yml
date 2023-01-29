@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'app-bettermart-backend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6D20C14084A749AE83051964C089BA0A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_301DE9B142D64B0EB1CDF7CA569C005A }}
           package: .
