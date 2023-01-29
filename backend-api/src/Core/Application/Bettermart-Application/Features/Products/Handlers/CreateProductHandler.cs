@@ -26,7 +26,7 @@ namespace Bettermart_Application.Features.Products.Handlers
         {
             var response = new BaseResponse<List<GetProductDto>>();
             var product = _mapper.Map<Product>(request.Product);
-            await _repository.InsertOneAsync(product);
+            _repository.InsertOneAsync(product);
 
             var products = await _repository.FilterBy(filter => true);
             var mappedProducts = _mapper.Map<List<GetProductDto>>(products);

@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bettermart.Domain", "Core\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bettermart.Persistance", "Insfrastructure\Persistance\Bettermart.Persistance\Bettermart.Persistance.csproj", "{FEF02AE2-214A-403D-90BC-9F4D59FD5D50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bettermart-Identity", "Insfrastructure\Identity\Bettermart-Identity\Bettermart-Identity.csproj", "{7B004828-CEC8-4120-97AE-69DEF81D23F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bettermart-Identity", "Insfrastructure\Identity\Bettermart-Identity\Bettermart-Identity.csproj", "{7B004828-CEC8-4120-97AE-69DEF81D23F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bettermart.Payments", "Bettermart.Payments\Bettermart.Payments.csproj", "{251A0C69-9780-4E99-A5AF-52779D76CF98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7B004828-CEC8-4120-97AE-69DEF81D23F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B004828-CEC8-4120-97AE-69DEF81D23F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B004828-CEC8-4120-97AE-69DEF81D23F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{251A0C69-9780-4E99-A5AF-52779D76CF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251A0C69-9780-4E99-A5AF-52779D76CF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251A0C69-9780-4E99-A5AF-52779D76CF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251A0C69-9780-4E99-A5AF-52779D76CF98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

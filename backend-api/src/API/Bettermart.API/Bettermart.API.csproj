@@ -11,10 +11,12 @@
     <PackageReference Include="AspNetCore.Firebase.Authentication" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
+    <PackageReference Include="Stripe.net" Version="41.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Bettermart.Payments\Bettermart.Payments.csproj" />
     <ProjectReference Include="..\..\Core\Application\Bettermart-Application\Bettermart-Application.csproj" />
     <ProjectReference Include="..\..\Core\Domain\Bettermart.Domain\Bettermart.Domain.csproj" />
     <ProjectReference Include="..\..\Insfrastructure\Identity\Bettermart-Identity\Bettermart-Identity.csproj" />
