@@ -5,6 +5,8 @@ name: Build and deploy ASP.Net Core app to Azure Web App - app-bettermart-backen
 
 on:
   push:
+    paths:
+      - backend-api/**
     branches:
       - master
   workflow_dispatch:
@@ -24,10 +26,12 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
-
+        working-directory: backend-api/src
+        
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
+        working-directory: backend-api/src
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
