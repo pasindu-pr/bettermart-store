@@ -7,6 +7,7 @@ import { ShoppingCartProductList } from "../../components";
 import ShoppingCartSummary from "../../components/products/shopping-cart-summary/shopping-car-summary";
 import { CartContext } from "../../context/cart-context";
 import { StripeProduct } from "../../types/products";
+import { OrderService } from "../../services";
 
 const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(publishableKey as string);
@@ -42,7 +43,22 @@ export default function ShoppingCart() {
     });
   }, [items]);
 
-  const createCheckOutSession = async () => {
+  const createOrder = async () => {
+    const productIds = items?.map((item) => item.id);
+
+    if (productIds) {
+      OrderService.createOrder(productIds)
+        .then((res) => {
+          const orderId = res.data.data;
+          createCheckOutSession(orderId);
+        })
+        .catch(() => {
+          toast.error("Something went wrong!");
+        });
+    }
+  };
+
+  const createCheckOutSession = async (orderId: string) => {
     const checkoutItems: StripeProduct[] =
       items?.map((item) => {
         return {
@@ -62,6 +78,7 @@ export default function ShoppingCart() {
     const checkoutSession = await axios.post("/api/create-stripe-session", {
       items: checkoutItems,
       shipping: order.shipping,
+      orderId: orderId,
     });
     const result = await stripe?.redirectToCheckout({
       sessionId: checkoutSession.data.id,
@@ -92,7 +109,7 @@ export default function ShoppingCart() {
             }}
             taxEstimate={{ title: "Tax estimate", amount: order.tax }}
             orderTotal={{ title: "Total", amount: order.total }}
-            onClick={createCheckOutSession}
+            onClick={createOrder}
           />
         </form>
       </div>
