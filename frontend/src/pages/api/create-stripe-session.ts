@@ -4,8 +4,11 @@ import { StripeProduct } from "../../types/products";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 async function CreateStripeSession(req: NextApiRequest, res: NextApiResponse) {
-  let { items, shipping }: { items: StripeProduct[]; shipping: number } =
-    req.body;
+  let {
+    items,
+    shipping,
+    orderId,
+  }: { items: StripeProduct[]; shipping: number; orderId: string } = req.body;
 
   items = items.map((item) => {
     return {
@@ -27,7 +30,7 @@ async function CreateStripeSession(req: NextApiRequest, res: NextApiResponse) {
     success_url: redirectURL + "?status=success",
     cancel_url: redirectURL + "?status=cancel",
     metadata: {
-      orderId: "123",
+      orderId: orderId,
     },
     shipping_options: [
       {

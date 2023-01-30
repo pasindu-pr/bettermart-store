@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Bettermart.Payments.Entities;
+﻿using Bettermart.Payments.Entities;
 using Bettermart_Application.Contracts; 
 using Bettermart_Application.Features.Orders.Commands;
 using Bettermart_Application.Responses;
@@ -10,13 +9,11 @@ namespace Bettermart_Application.Features.Orders.Handlers
 {
     public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, BaseResponse<String>>
     {
-        private readonly IGenericRepository<Order> _repository;
-        private readonly IMapper _mapper;
+        private readonly IGenericRepository<Order> _repository; 
 
-        public CreateOrderHandler(IGenericRepository<Order> repository, IMapper mapper)
+        public CreateOrderHandler(IGenericRepository<Order> repository)
         {
-            _repository = repository;
-            _mapper = mapper;
+            _repository = repository; 
         }
 
         public async Task<BaseResponse<String>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
