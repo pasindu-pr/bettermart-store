@@ -6,7 +6,7 @@ namespace Bettermart.Payments
 {
     public static class PaymentServicesRegistration
     {
-        public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
+        public static IServiceCollection ConfigurePaymentServices(this IServiceCollection services)
         {
             services.AddScoped<IPaymentService, PaymentService>();
             return services;

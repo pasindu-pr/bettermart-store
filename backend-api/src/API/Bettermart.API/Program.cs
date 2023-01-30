@@ -5,6 +5,7 @@ using Bettermart_Identity;
 using Bettermart_Application.Contracts;
 using Microsoft.Extensions.Options;
 using Bettermart.API.Swagger;
+using Bettermart.Payments;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddSingleton<IDatabaseSettings>(serviceProvider =>
 builder.Services.ConfigurePersistanceServices();
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureIdentityServices(builder.Configuration);
+builder.Services.ConfigurePaymentServices();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
