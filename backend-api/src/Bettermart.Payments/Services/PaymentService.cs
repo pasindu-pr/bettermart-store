@@ -12,9 +12,31 @@ namespace Bettermart.Payments.Services {
             _repository = repository;
         }
 
-        public void SavePaymentInfo(Event stripeEvent)
+        public async Task<bool> SavePaymentInfo(Event stripeEvent)
         {
-            return;
+            var paymentInfomation = stripeEvent.Data.Object as Stripe.Checkout.Session;
+            String OrderId = paymentInfomation.Metadata["orderId"];
+            var shippingDetails = paymentInfomation.ShippingDetails.Address;
+
+
+            Entities.Shipping shippingAddress = new Entities.Shipping
+            {
+                AddressLine1 = shippingDetails.Line1,
+                AddressLine2 = shippingDetails.Line2,
+                ShippingCity = shippingDetails.City,
+                Country = shippingDetails.Country,
+                State = shippingDetails.State,
+                ZipCode = shippingDetails.PostalCode
+            };
+
+
+            Order order = await _repository.FindByIdAsync(OrderId);
+            order.PaymentStatus = true;
+            order.PaymentId = paymentInfomation.Id;
+            order.shipping = shippingaddress;
+
+            await _repository.ReplaceOneAsync(order);
+            return true;
         }
     }
 }

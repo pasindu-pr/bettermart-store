@@ -9,10 +9,12 @@ namespace Bettermart.API.Controllers
     public class PaymentsController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
+        private readonly IConfiguration _configuration;
 
-        public PaymentsController(IPaymentService paymentService)
+        public PaymentsController(IPaymentService paymentService, IConfiguration configuration)
         {
             _paymentService = paymentService;
+            _configuration = configuration;
         }
 
         [HttpPost("webhook")]
@@ -21,13 +23,26 @@ namespace Bettermart.API.Controllers
             try
             {
                 var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-                var enpointSecret = "whsec_55e1a53d9b17cf09245ddfdc18390c710c4ca0a31fd1d88fe27540c2111b8c86";
+                var enpointSecret = _configuration.GetValue<string>("Stripe:SigningSecret");
                 var signatureHeader = Request.Headers["Stripe-Signature"];
                 Event stripeEvent = EventUtility.ConstructEvent(json, signatureHeader, enpointSecret);
+                if (stripeEvent.Type == Events.CheckoutSessionCompleted)
+                {
+                    
+                    bool isPaymentUpdated = await _paymentService.SavePaymentInfo(stripeEvent);
 
-                _paymentService.SavePaymentInfo(stripeEvent);
+                    if (isPaymentUpdated)
+                    {
+                        return Ok();
+                    }else
+                    {
+                        return BadRequest();
+                    }
+                    
+                }
 
-                return Ok();
+                return BadRequest();
+               
             }
             catch(StripeException e)
             {
