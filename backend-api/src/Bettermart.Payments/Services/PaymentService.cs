@@ -33,7 +33,7 @@ namespace Bettermart.Payments.Services {
             Order order = await _repository.FindByIdAsync(OrderId);
             order.PaymentStatus = true;
             order.PaymentId = paymentInfomation.Id;
-            order.shipping = shippingaddress;
+            order.shipping = shippingAddress;
 
             await _repository.ReplaceOneAsync(order);
             return true;
