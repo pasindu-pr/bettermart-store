@@ -1,23 +1,29 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 
-import { ProductCard, ProductsCardTall } from "../components";
+import {
+  ProductCard,
+  ProductsCardTall,
+  ShoppingCartProductList,
+} from "../components";
 import { products } from "../data";
 import { PageLayout } from "../layouts";
+import { ProductService } from "../services";
+import { HomePageProps } from "../types/pages/props";
 
-const Home: NextPage = () => {
+const Home: NextPage<HomePageProps> = ({ products }) => {
   return (
     <PageLayout>
       <div className="bg-white">
         <div className="max-w-2xl mx-auto py-8 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8">
-            {products.map((product) => (
+            {products?.map((product) => (
               <ProductsCardTall
-                id={"random"}
+                id={product.id}
                 name={product.name}
                 price={product.price}
-                smallDescription={product.description}
-                imageSrc={product.imageSrc}
-                imageAlt={product.imageAlt}
+                smallDescription={"Small description"}
+                imageSrc={product.image[0]}
+                imageAlt={product.name}
               />
             ))}
           </div>
@@ -25,7 +31,7 @@ const Home: NextPage = () => {
       </div>
       {/* Treding Products */}
 
-      <div className="bg-white">
+      {/* <div className="bg-white">
         <div className="max-w-2xl mx-auto py-4 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="md:flex md:items-center md:justify-between">
             <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
@@ -74,9 +80,16 @@ const Home: NextPage = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </PageLayout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await ProductService.getProducts();
+  const products = res.data.data;
+
+  return { props: { products } };
 };
 
 export default Home;

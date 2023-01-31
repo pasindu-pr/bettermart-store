@@ -9,6 +9,7 @@ const ShoppingCartSummary = ({
   shippingEstimate,
   taxEstimate,
   orderTotal,
+  onClick,
 }: ShoppingCartSummaryProps) => {
   return (
     <section
@@ -48,13 +49,7 @@ const ShoppingCartSummary = ({
       </dl>
 
       <div className="mt-6">
-        <Button
-          type="submit"
-          onClick={() => {
-            console.log("");
-          }}
-          title="Checkout"
-        />
+        <Button type="button" onClick={onClick} title="Checkout" />
       </div>
     </section>
   );

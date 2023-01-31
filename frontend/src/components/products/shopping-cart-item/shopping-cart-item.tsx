@@ -9,7 +9,8 @@ const ShoppingCartItem = ({
   price,
   imageSrc,
   imageAlt,
-  shippingTime,
+  removeItem,
+  quantity,
 }: ProductCardProps) => {
   return (
     <li key={id} className="flex py-6 sm:py-10">
@@ -27,13 +28,18 @@ const ShoppingCartItem = ({
             <div className="flex justify-between">
               <h3 className="text-sm">{name}</h3>
             </div>
-
-            <p className="mt-1 text-sm font-medium text-gray-900">{price}</p>
+            <p className="mt-1 text-sm font-medium text-gray-900">{price}$</p>
+            <p className="mt-1 text-sm font-medium text-gray-900">
+              Quantity {quantity}
+            </p>
           </div>
 
           <div className="mt-4 sm:mt-0 sm:pr-9">
             <div className="absolute top-0 right-0">
               <button
+                onClick={() => {
+                  if (removeItem) removeItem(id);
+                }}
                 type="button"
                 className="-m-2 p-2 inline-flex text-gray-400 hover:text-gray-500"
               >
@@ -44,14 +50,14 @@ const ShoppingCartItem = ({
           </div>
         </div>
 
-        <p className="mt-4 flex text-sm text-gray-700 space-x-2">
+        {/* <p className="mt-4 flex text-sm text-gray-700 space-x-2">
           <CheckIcon
             className="flex-shrink-0 h-5 w-5 text-green-500"
             aria-hidden="true"
           />
 
           <span>{`In stock Ships in ${shippingTime}`}</span>
-        </p>
+        </p> */}
       </div>
     </li>
   );

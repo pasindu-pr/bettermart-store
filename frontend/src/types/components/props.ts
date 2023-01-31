@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { CartItem } from "./cart-item";
 import { SelectOption } from "./selectoptions";
 
 export type PageLayoutProps = {
@@ -12,11 +13,13 @@ export type H2Props = {
 export type ProductCardProps = {
   id: string;
   name: string;
-  price: string;
+  price: number;
   smallDescription?: string;
   imageSrc: string;
   imageAlt: string;
   shippingTime?: string;
+  quantity?: number;
+  removeItem?: (id: string) => void;
 };
 
 export type OrderSummaryItemProps = {
@@ -47,13 +50,16 @@ export type ShoppingCartSummaryProps = {
     title: string;
     amount: number;
   };
+
+  onClick: () => void;
 };
 
 export type CheckoutItemProps = {
   name: string;
   imageSrc: string;
   imageAlt: string;
-  price: string;
+  price: number;
+  quantity: number;
 };
 
 export type SelectProps = {
@@ -89,7 +95,13 @@ export type InputComponentProps = {
 export type ErrorProps = { message: string };
 
 export type ImageUploadProps = {
+  id: string;
   label: string;
   uploadProgress: number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type ShoppingCartProductListProps = {
+  products: CartItem[] | undefined;
+  removeItem: (id: string) => void;
 };
