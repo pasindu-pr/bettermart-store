@@ -16,7 +16,7 @@ builder.Services.AddSingleton<IDatabaseSettings>(serviceProvider =>
     serviceProvider.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 builder.Services.ConfigurePersistanceServices();
 builder.Services.ConfigureApplicationServices();
-builder.Services.ConfigureIdentityServices(builder.Configuration);
+builder.Services.ConfigureIdentityServices(builder.Configuration); 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
