@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace Bettermart_Identity
 {
@@ -9,23 +12,19 @@ namespace Bettermart_Identity
     {
         public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var appId = configuration.GetValue<string>("FirebaseAuthentication:AppId");
+
+            Dictionary<string, object> settings = configuration.GetSection("FirebaseAdminCredentials").Get<Dictionary<string, object>>();
+            string firebaseAdminCredentialsJson = JsonConvert.SerializeObject(settings);
+
+            services.AddSingleton(FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromJson(firebaseAdminCredentialsJson),
+            }
+            ));
 
             services
                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-                   {
-                       options.Authority = $"https://securetoken.google.com/{appId}";
-                       options.TokenValidationParameters = new TokenValidationParameters
-                       {
-                           ValidateIssuer = true,
-                           ValidIssuer = $"https://securetoken.google.com/{appId}",
-                           ValidateAudience = true,
-                           ValidAudience = appId,
-                           ValidateLifetime = true
-                       };
-                   });
-
+               .AddScheme<AuthenticationSchemeOptions, Handlers.FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, (o) => { });
 
             return services;
 
