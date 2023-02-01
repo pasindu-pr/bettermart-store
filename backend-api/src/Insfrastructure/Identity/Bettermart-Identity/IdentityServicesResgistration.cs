@@ -1,6 +1,10 @@
-﻿using AspNetCore.Firebase.Authentication.Extensions;
+﻿using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Bettermart_Identity
 {
@@ -8,10 +12,22 @@ namespace Bettermart_Identity
     {
         public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
-            string issuer = configuration.GetValue<string>("FirebaseAuthentication:Issuer");
-            string audience = configuration.GetValue<string>("FirebaseAuthentication:Audience");
-            services.AddFirebaseAuthentication(issuer, audience);
+
+            Dictionary<string, object> settings = configuration.GetSection("FirebaseAdminCredentials").Get<Dictionary<string, object>>();
+            string firebaseAdminCredentialsJson = JsonConvert.SerializeObject(settings);
+
+            services.AddSingleton(FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromJson(firebaseAdminCredentialsJson),
+            }
+            ));
+
+            services
+               .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddScheme<AuthenticationSchemeOptions, Handlers.FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, (o) => { });
+
             return services;
+
         }
     }
 }
