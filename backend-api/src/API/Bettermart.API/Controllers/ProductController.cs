@@ -21,7 +21,6 @@ namespace Bettermart.API.Controllers
 
         
         [HttpGet]
-        [Authorize]
         public async Task<BaseResponse<List<GetProductDto>>> GetProducts()
         {
             var products = await _mediator.Send(new GetProductListQuery());
