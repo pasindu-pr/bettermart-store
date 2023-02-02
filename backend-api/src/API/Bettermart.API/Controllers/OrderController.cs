@@ -1,6 +1,7 @@
 ﻿using Bettermart_Application.Features.Orders.Commands;
 using Bettermart_Application.Responses;
-using MediatR; 
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bettermart.API.Controllers
@@ -17,6 +18,7 @@ namespace Bettermart.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<BaseResponse<String>> CreateOrder(String[] productIds)
         {
             var response = await _mediator.Send(new CreateOrderCommand { products = productIds });
