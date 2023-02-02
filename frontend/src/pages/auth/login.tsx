@@ -37,7 +37,11 @@ export default function Login() {
   };
 
   const redirectToHome = () => {
-    router.push("/");
+    if (router.query.redirect) {
+      router.push(router.query.redirect as string);
+    } else {
+      router.push("/");
+    }
   };
 
   return (
