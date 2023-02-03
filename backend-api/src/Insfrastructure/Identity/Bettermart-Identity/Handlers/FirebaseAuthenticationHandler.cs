@@ -11,7 +11,8 @@ namespace Bettermart_Identity.Handlers
 {
     public class FirebaseAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-
+        private const string admin = "admin";
+        private const string userId = "userId";
         private readonly FirebaseApp _firebaseApp;
 
         public FirebaseAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, FirebaseApp firebaseApp) : base(options, logger, encoder, clock)
@@ -48,10 +49,17 @@ namespace Bettermart_Identity.Handlers
 
         private IEnumerable<Claim> ToClaims (IReadOnlyDictionary<string, object> claims)
         {
-            return new List<Claim>
+
+            List<Claim> claimsList = new List<Claim>();
+            claimsList.Add(new Claim(userId, claims[userId].ToString()));
+ 
+            if (claims.ContainsKey(admin))
             {
-                new Claim("userId", claims["user_id"].ToString()),
-            };
+                claimsList.Add(new Claim(admin, claims[admin].ToString()));
+            }
+
+            return claimsList;
+
         }
     }
 }

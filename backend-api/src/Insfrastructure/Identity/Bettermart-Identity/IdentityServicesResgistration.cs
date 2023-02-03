@@ -1,4 +1,6 @@
-﻿using FirebaseAdmin;
+﻿using Bettermart_Identity.Contracts;
+using Bettermart_Identity.Services;
+using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,6 +28,13 @@ namespace Bettermart_Identity
                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddScheme<AuthenticationSchemeOptions, Handlers.FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, (o) => { });
 
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("admin", policy => policy.RequireClaim("admin"));
+            });
+
+            services.AddSingleton<IAdminUserService, AdminUserService>();
             return services;
 
         }

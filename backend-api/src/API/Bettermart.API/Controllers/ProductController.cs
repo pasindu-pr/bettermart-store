@@ -35,6 +35,7 @@ namespace Bettermart.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "admin")]
         public async Task<BaseResponse<List<GetProductDto>>> CreateProduct(CreateProductDto product)
         {
             var products = await _mediator.Send(new CreateProductCommand { Product = product});
@@ -42,6 +43,7 @@ namespace Bettermart.API.Controllers
         }
 
         [HttpPut("{productId}")]
+        [Authorize(Policy = "admin")]
         public async Task<ActionResult<BaseResponse<GetProductDto>>> UpdateProduct(UpdateProductDto product)
         {
             var updatedProductResponse = await _mediator.Send(new UpdateProductCommand { Product = product });
@@ -49,6 +51,7 @@ namespace Bettermart.API.Controllers
         }
 
         [HttpDelete("{productId}")]
+        [Authorize(Policy = "admin")]
         public async Task<ActionResult<BaseResponse<GetProductDto>>> DeleteProduct(string productId)
         {
             var deletedProductResponse = await _mediator.Send(new DeleteProductCommand { ProductId = productId });
