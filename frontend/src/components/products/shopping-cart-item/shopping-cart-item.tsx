@@ -28,7 +28,9 @@ const ShoppingCartItem = ({
             <div className="flex justify-between">
               <h3 className="text-sm">{name}</h3>
             </div>
-            <p className="mt-1 text-sm font-medium text-gray-900">{price}$</p>
+            <p className="mt-1 text-sm font-medium text-gray-900">
+              $<span>{price}</span>
+            </p>
             <p className="mt-1 text-sm font-medium text-gray-900">
               Quantity {quantity}
             </p>

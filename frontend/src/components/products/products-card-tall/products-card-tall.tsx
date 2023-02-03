@@ -28,8 +28,11 @@ const ProductsCardTall = ({
       </div>
       <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
         <h3>{name}</h3>
-        <p>{price} $</p>
+        <p>
+          $<span>{price}</span>
+        </p>
       </div>
+
       <p className="mt-1 text-sm italic text-gray-500">{smallDescription}</p>
     </div>
   );
