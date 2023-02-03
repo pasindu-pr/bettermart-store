@@ -3,6 +3,25 @@ import "@testing-library/jest-dom/extend-expect";
 import ProductCardTall from "../products-card-tall";
 import { products } from "../../../../data";
 
+// Mock the jest router
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/",
+      pathname: "",
+      query: "",
+      asPath: "",
+      push: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
+      beforePopState: jest.fn(() => null),
+      prefetch: jest.fn(() => null),
+    };
+  },
+}));
+
 test("renders tall product card with details passed by props", () => {
   const product = products[0];
 
@@ -10,7 +29,7 @@ test("renders tall product card with details passed by props", () => {
     <ProductCardTall
       id={"random"}
       name={product.name}
-      price={product.price}
+      price={Number(product.price)}
       smallDescription={product.description}
       imageSrc={product.imageSrc}
       imageAlt={product.imageAlt}

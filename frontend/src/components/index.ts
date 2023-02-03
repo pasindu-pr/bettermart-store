@@ -7,7 +7,6 @@ import ShoppingCartItem from "./products/shopping-cart-item/shopping-cart-item";
 import OrderSummaryItem from "./orders/order-summary-item/order-summary-item";
 import ShoppingCartProductList from "./products/shopping-cart-prouducts-list/shopping-cart-product-list";
 import Input from "./input/input";
-import CheckoutItem from "./orders/checkout-item/checkout-item";
 import AccountSummary from "./admin/account-summary/account-summary";
 import SideBar from "./admin/sidebar/sidebar";
 import ProfileDropdown from "./admin/profile-dropdown/profile-dropdown";
@@ -27,7 +26,6 @@ export {
   ShoppingCartItem,
   OrderSummaryItem,
   ShoppingCartProductList,
-  CheckoutItem,
   Button,
   AccountSummary,
   SideBar,

@@ -1,4 +1,6 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../context";
 
 import { ShoppingCartSummaryProps } from "../../../types/components/props";
 import Button from "../../button/button";
@@ -11,6 +13,20 @@ const ShoppingCartSummary = ({
   orderTotal,
   onClick,
 }: ShoppingCartSummaryProps) => {
+  const { user } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleOnClick = () => {
+    if (!user) {
+      router.push({
+        pathname: "/auth/login",
+        query: { redirect: "/products/shopping-cart" },
+      });
+    } else {
+      onClick();
+    }
+  };
+
   return (
     <section
       aria-labelledby="summary-heading"
@@ -49,7 +65,11 @@ const ShoppingCartSummary = ({
       </dl>
 
       <div className="mt-6">
-        <Button type="button" onClick={onClick} title="Checkout" />
+        <Button
+          type="button"
+          onClick={handleOnClick}
+          title={user ? "Checkout" : "Login to checkout"}
+        />
       </div>
     </section>
   );

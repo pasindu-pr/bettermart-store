@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { Tab } from "@headlessui/react";
 import { GetServerSideProps, NextPage } from "next";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 import { ProductService } from "../../../services";
 import { ProductDetailPageProps } from "../../../types/pages/props";
 import { uuid } from "../../../libs";
 import { Button, Input } from "../../../components";
 import { CartItem } from "../../../types/components";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { CartContext } from "../../../context/cart-context";
 
 const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {

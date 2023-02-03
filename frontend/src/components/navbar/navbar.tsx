@@ -1,12 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  MenuIcon,
-  SearchIcon,
-  ShoppingCartIcon,
-  UserIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { MenuIcon, ShoppingCartIcon, XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context";
 import { AuthService } from "../../services";
@@ -181,10 +175,6 @@ export default function NavBar() {
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
                           >
                             <span className="sr-only">Account</span>
-                            <UserIcon
-                              className="w-6 h-6 text-[#5263f3]"
-                              aria-hidden="true"
-                            />
                           </a>
                         </div>
                       </div>
