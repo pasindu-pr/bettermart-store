@@ -6,6 +6,7 @@ using Bettermart_Application.Contracts;
 using Microsoft.Extensions.Options;
 using Bettermart.API.Swagger;
 using Bettermart.Payments;
+using Bettermart_Identity.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,5 +52,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.Lifetime.ApplicationStarted.Register(async () => {
+    var adminUserService = new AdminUserService();
+    await adminUserService.createDefaultAdminUserAsync();
+});
 
 app.Run();
