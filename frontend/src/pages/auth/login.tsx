@@ -48,7 +48,10 @@ export default function Login() {
   return (
     <>
       <AuthPageLayout title="Sign in to your account">
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="w-full mt-8 space-y-6"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <Input

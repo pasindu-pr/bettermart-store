@@ -9,22 +9,19 @@ const AuthPageLayout = ({
   title: string;
 }) => {
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <div className="w-full flex justify-center">
-            <div className="relative w-12 h-12">
-              <Image
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt="Bettermart Logo"
-              />
+    <div className="">
+      <div className="w-full min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8">
+          <div>
+            <div className="w-full flex justify-center">
+              <div className="relative w-full h-full"></div>
             </div>
+
+            <H2 text={title} />
           </div>
 
-          <H2 text={title} />
+          {children}
         </div>
-
-        {children}
       </div>
     </div>
   );

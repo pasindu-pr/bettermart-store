@@ -9,6 +9,7 @@ import { uuid } from "../../../libs";
 import { Button, Input } from "../../../components";
 import { CartItem } from "../../../types/components";
 import { CartContext } from "../../../context/cart-context";
+import toast from "react-hot-toast";
 
 const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
   const { addItems } = useContext(CartContext);
@@ -20,15 +21,19 @@ const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
   } = useForm<CartItem>();
 
   const onSubmit: SubmitHandler<CartItem> = (data) => {
-    const item: CartItem = {
-      ...data,
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image[0],
-    };
+    if (!Number(data.quantity)) {
+      toast.error("Please enter quantity");
+    } else {
+      const item: CartItem = {
+        ...data,
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image[0],
+      };
 
-    addItems(item);
+      addItems(item);
+    }
   };
 
   return (
