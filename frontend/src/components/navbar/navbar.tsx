@@ -12,7 +12,7 @@ export default function NavBar() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const { user } = useContext(AuthContext);
+  const { user, admin } = useContext(AuthContext);
   const { items } = useContext(CartContext);
 
   const signOut = () => {
@@ -23,6 +23,11 @@ export default function NavBar() {
       .catch(() => {
         toast.error("There was an error while sign out");
       });
+  };
+
+  // onClick event to redirect to admin
+  const redirectToAdmin = () => {
+    router.push("/admin");
   };
 
   return (
@@ -178,12 +183,18 @@ export default function NavBar() {
                           </a>
                         </div>
                       </div>
-
+                      {admin && (
+                        <span
+                          className="text-[#5263f3] cursor-pointer"
+                          onClick={redirectToAdmin}
+                        >
+                          Admin
+                        </span>
+                      )}
                       <span
                         className="mx-4 h-6 w-px bg-gray-200 lg:mx-6"
                         aria-hidden="true"
                       />
-
                       <div className="flow-root">
                         <p
                           onClick={() => router.push("/products/shopping-cart")}

@@ -7,6 +7,7 @@ import NavBar from "../components/navbar/navbar";
 import { AuthProvider } from "../context";
 import { useRouter } from "next/router";
 import { CartProvider } from "../context/cart-context";
+import { PageLayout } from "../layouts";
 
 const inter = Inter({
   weight: ["400", "600", "700"],
@@ -22,11 +23,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <AuthProvider>
         <CartProvider>
-          <main className={`${inter.variable} font-sans`}>
-            {!router.pathname.startsWith("/admin") && <NavBar />}
-            <Component {...pageProps} />
-            <Toaster />
-          </main>
+          <PageLayout>
+            <main className={`${inter.variable} font-sans`}>
+              {!router.pathname.startsWith("/admin") && <NavBar />}
+              <Component {...pageProps} />
+              <Toaster />
+            </main>
+          </PageLayout>
         </CartProvider>
       </AuthProvider>
     </>
