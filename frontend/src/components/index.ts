@@ -16,6 +16,7 @@ import H2 from "./h2/h2";
 import Image from "./image/image";
 import Error from "./error/error";
 import ImageUploadInput from "./image-upload-input/image-upload-input";
+import Footer from "./footer/footer";
 
 export {
   Input,
@@ -36,4 +37,5 @@ export {
   Image,
   Error,
   ImageUploadInput,
+  Footer,
 };
