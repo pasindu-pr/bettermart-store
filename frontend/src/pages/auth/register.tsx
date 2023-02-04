@@ -40,7 +40,7 @@ const Register = () => {
     <>
       <AuthPageLayout title="Create your account">
         <form
-          className="mt-8 space-y-6"
+          className="w-full mt-8 space-y-6"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >

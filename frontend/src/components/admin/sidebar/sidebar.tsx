@@ -32,13 +32,6 @@ const Sidebar = () => {
   return (
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:min-h-screen lg:inset-y-0">
       <div className="flex flex-col flex-grow bg-cyan-700 pt-5 pb-4 overflow-y-auto">
-        <div className="flex items-center flex-shrink-0 px-4">
-          <img
-            className="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/easywire-logo-cyan-300-mark-white-text.svg"
-            alt="Easywire logo"
-          />
-        </div>
         <nav
           className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto"
           aria-label="Sidebar"
