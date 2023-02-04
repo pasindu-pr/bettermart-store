@@ -48,50 +48,54 @@ export default function Login() {
   return (
     <>
       <AuthPageLayout title="Sign in to your account">
-        <form
-          className="w-full mt-8 space-y-6"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
-            <Input
-              {...register("email", {
-                required: "Email is required",
-              })}
-              type="email"
-              placeholder="Email"
-              additionalStyles="rounded-t"
-            />
+        <div className="lg:w-1/4 flex flex-col items-center justify-center mx-auto">
+          <form
+            className="w-full mt-8 space-y-6"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <input type="hidden" name="remember" defaultValue="true" />
+            <div className="rounded-md shadow-sm -space-y-px">
+              <Input
+                {...register("email", {
+                  required: "Email is required",
+                })}
+                type="email"
+                placeholder="Email"
+                additionalStyles="rounded-t"
+              />
 
-            <Input
-              {...register("password", {
-                required: "Password is required",
-              })}
-              type="password"
-              placeholder="Password"
-              additionalStyles="rounded-b"
-            />
-          </div>
-
-          <div className="mt-2">
-            {errors.email && <Error message={errors.email.message as string} />}
-
-            {errors.password && (
-              <Error message={errors.password.message as string} />
-            )}
-          </div>
-
-          <Button title="Login" size="small" />
-
-          <div className="flex w-full justify-center gap-4">
-            <div
-              onClick={handleGoogleLogin}
-              className="flex items-center shadow-md px-2 cursor-pointer border-2 border-indigo-50 gap-3 rounded-3xl py-2"
-            >
-              <img src="/images/social/google.svg" className="w-6" />
+              <Input
+                {...register("password", {
+                  required: "Password is required",
+                })}
+                type="password"
+                placeholder="Password"
+                additionalStyles="rounded-b"
+              />
             </div>
-          </div>
-        </form>
+
+            <div className="mt-2">
+              {errors.email && (
+                <Error message={errors.email.message as string} />
+              )}
+
+              {errors.password && (
+                <Error message={errors.password.message as string} />
+              )}
+            </div>
+
+            <Button title="Login" size="small" />
+
+            <div className="flex w-full justify-center gap-4">
+              <div
+                onClick={handleGoogleLogin}
+                className="flex items-center shadow-md px-2 cursor-pointer border-2 border-indigo-50 gap-3 rounded-3xl py-2"
+              >
+                <img src="/images/social/google.svg" className="w-6" />
+              </div>
+            </div>
+          </form>
+        </div>
       </AuthPageLayout>
     </>
   );

@@ -12,7 +12,7 @@ namespace Bettermart_Identity.Handlers
     public class FirebaseAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         private const string admin = "admin";
-        private const string userId = "userId";
+        private const string userId = "user_id";
         private readonly FirebaseApp _firebaseApp;
 
         public FirebaseAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, FirebaseApp firebaseApp) : base(options, logger, encoder, clock)
